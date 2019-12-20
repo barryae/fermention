@@ -12,7 +12,7 @@ Fermentation is an ancient cultural tradition in every human culture (and some a
 
 ## **Design Layout**
 
-![Design Layout](https://github.com/barryae/fermention/client/public/images/fermention_layout.jpg)
+![Design Layout](https://github.com/barryae/fermention/blob/master/client/public/images/fermention_layout.jpg)
 
 ## **Group Roles**
 
@@ -46,4 +46,4 @@ Fermentation is an ancient cultural tradition in every human culture (and some a
 
 ## **Project Management Board Screenshot**
 
-![Project Board](https://github.com/barryae/fermention/client/public/images/projectBoard.png)
+![Project Board](https://github.com/barryae/fermention/blob/master/client/public/images/projectBoard.png)
