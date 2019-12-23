@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 export class NewUserForm extends Component {
   state = {

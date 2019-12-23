@@ -1,8 +1,9 @@
 import React from "react";
+import LoginForm from "../components/LoginForm";
 
 function Login() {
     return (
-        <h1>If the user is not logged in, they will be redirected to this page!</h1>
+        <LoginForm />
     );
 }
 
