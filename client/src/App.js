@@ -4,18 +4,26 @@ import "./App.css";
 import NewBrew from "./pages/NewBrew";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import LoginPage from "./components/LoginPage/LoginPage";
+import NavBar from "./components/NavBar/Navbar";
+import { Container } from "@material-ui/core";
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/newbrew" component={NewBrew} />
-          <Route exact path="/login" component={Login} />
-        </div>
-      </Router>
+      <>
+        <NavBar />
+        <Container>
+          <Router>
+            <div>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/newbrew" component={NewBrew} />
+              <Route exact path="/login" component={Login} />
+            </div>
+          </Router>
+        </Container>
+      </>
     );
   }
 }
