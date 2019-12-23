@@ -11,11 +11,13 @@ class NewBrewForm extends Component {
         title: "",
         category: "Other",
         description: "",
-        startDate: new Date(),
-        endDate: new Date(),
+        ingredients: [],
+        startTime: new Date(),
+        endTime: new Date(),
         days: 0,
         hours: 0,
-        mins: 0
+        mins: 0,
+        picture: ""
     }
 
     handleInputChange = event => {
@@ -28,17 +30,33 @@ class NewBrewForm extends Component {
 
     handleDateChange = date => {
         this.setState({
-            startDate: date
+            startTime: date
         });
     };
 
     calcEndDate = (days, hours, mins) => {
-        let endDate = new Date();
-        let startDate = this.state.startDate;
-        endDate.setMinutes(startDate.getMinutes() + mins);
-        endDate.setHours(endDate.getHours() + hours);
-        endDate.setDate(endDate.getDate() + days);
-        return endDate;
+        let endTime = new Date();
+        let startTime = this.state.startTime;
+        endTime.setMinutes(startTime.getMinutes() + mins);
+        endTime.setHours(endTime.getHours() + hours);
+        endTime.setDate(endTime.getDate() + days);
+        return endTime;
+    }
+
+    calcBrewLength = (days, hours, mins) => {
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (mins < 10) {
+            mins = "0" + mins;
+        }
+        let brewLength = `${days}:${hours}:${mins}:00`
+        return brewLength;
+    }
+
+    addIngredient = event => {
+        event.preventDefault();
+        alert("ingredient added!")
     }
 
     handleSubmit = event => {
@@ -46,9 +64,12 @@ class NewBrewForm extends Component {
         const data = {
             title: this.state.title,
             category: this.state.category,
+            ingredients: this.state.ingredients,
             description: this.state.description,
-            startDate: this.state.startDate,
-            endDate: this.calcEndDate(this.state.days, this.state.hours, this.state.mins)
+            startTime: this.state.startTime,
+            endTime: this.calcEndDate(this.state.days, this.state.hours, this.state.mins),
+            brewLength: this.calcBrewLength(this.state.days, this.state.hours, this.state.mins),
+            picture: this.state.picture
         }
         console.log(data)
     };
@@ -101,7 +122,7 @@ class NewBrewForm extends Component {
                                 <option value={5}>kg</option>
                             </NativeSelect>
                             <br></br>
-                            <button id="addIngBtn">+</button>
+                            <button id="addIngBtn" onClick={this.addIngredient}>+</button>
                         </div>
                     </FormControl>
 
