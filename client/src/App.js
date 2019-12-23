@@ -4,7 +4,7 @@ import "./App.css";
 import NewBrew from "./pages/NewBrew";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import LoginPage from "./components/LoginPage/LoginPage";
+import LoginForm from "./components/LoginForm/LoginForm";
 import NavBar from "./components/NavBar/Navbar";
 import { Container } from "@material-ui/core";
 
