@@ -9,26 +9,48 @@ class NewBrewForm extends Component {
 
     state = {
         title: "",
-        selectedDate: React.useState(),
-        setSelectedDate: React.useState(),
+        category: "Other",
+        description: "",
+        startDate: new Date(),
+        endDate: new Date(),
+        days: 0,
+        hours: 0,
+        mins: 0
     }
 
     handleInputChange = event => {
-        const { name, value } = event.target;
+        const { name, value, type } = event.target;
+
         this.setState({
-            [name]: value
+            [name]: type === 'number' ? parseInt(value) : value
         });
     };
 
-
-
     handleDateChange = date => {
-        this.setSelectedDate = date;
+        this.setState({
+            startDate: date
+        });
     };
+
+    calcEndDate = (days, hours, mins) => {
+        let endDate = new Date();
+        let startDate = this.state.startDate;
+        endDate.setMinutes(startDate.getMinutes() + mins);
+        endDate.setHours(endDate.getHours() + hours);
+        endDate.setDate(endDate.getDate() + days);
+        return endDate;
+    }
 
     handleSubmit = event => {
         event.preventDefault();
-        alert(this.state);
+        const data = {
+            title: this.state.title,
+            category: this.state.category,
+            description: this.state.description,
+            startDate: this.state.startDate,
+            endDate: this.calcEndDate(this.state.days, this.state.hours, this.state.mins)
+        }
+        console.log(data)
     };
 
     render() {
@@ -40,6 +62,7 @@ class NewBrewForm extends Component {
                         <h6 >Title:</h6>
                         <Input
                             value={this.state.title}
+                            name="title"
                             onChange={this.handleInputChange} />
                         <FormHelperText >Required</FormHelperText>
                     </FormControl>
@@ -47,16 +70,16 @@ class NewBrewForm extends Component {
                     <FormControl
                         fullWidth={true}>
                         <h6>Category:</h6>
-                        <NativeSelect>
-                            <option value={0}>Other</option>
-                            <option value={1}>Beer</option>
-                            <option value={2}>Vinegar</option>
-                            <option value={3}>Bread</option>
-                            <option value={4}>Pickle</option>
-                            <option value={5}>Kombucha</option>
-                            <option value={6}>Miso</option>
-                            <option value={7}>Wine</option>
-                            <option value={8}>Kimchi</option>
+                        <NativeSelect name="category" onChange={this.handleInputChange}>
+                            <option value={"Other"}>Other</option>
+                            <option value={"Beer"}>Beer</option>
+                            <option value={"Vinegar"}>Vinegar</option>
+                            <option value={"Bread"}>Bread</option>
+                            <option value={"Pickle"}>Pickle</option>
+                            <option value={"Kombucha"}>Kombucha</option>
+                            <option value={"Miso"}>Miso</option>
+                            <option value={"Wine"}>Wine</option>
+                            <option value={"Kimchi"}>Kimchi</option>
                         </NativeSelect>
                     </FormControl>
                     <FormControl fullWidth={true}>
@@ -87,6 +110,8 @@ class NewBrewForm extends Component {
                         <h6>Description:</h6>
                         <TextField
                             multiline
+                            onChange={this.handleInputChange}
+                            name="description"
                         />
                     </FormControl>
 
@@ -99,13 +124,13 @@ class NewBrewForm extends Component {
                                 variant="inline"
                                 format="MM/dd/yyyy"
                                 onChange={this.handleDateChange}
-                                value={this.selectedDate}
+                                value={this.state.date}
                             />
                             <KeyboardTimePicker
                                 margin="normal"
                                 variant="inline"
                                 onChange={this.handleDateChange}
-                                value={this.selectedDate}
+                                value={this.state.date}
                             />
                         </MuiPickersUtilsProvider>
                     </FormControl>
@@ -114,13 +139,36 @@ class NewBrewForm extends Component {
                         <h6>Brew Time:</h6>
                         <div>
                             <h5 className="subLabel">Days:</h5>
-                            <input className="subInput" id="days" type="number" min="0" placeholder="0"></input>
+                            <input
+                                className="subInput"
+                                id="days"
+                                type="number"
+                                min={0}
+                                name="days"
+                                onChange={this.handleInputChange}
+                                placeholder={0}></input>
                             <br></br>
                             <h5 className="subLabel">Hours:</h5>
-                            <input className="subInput" id="hours" type="number" min="0" max="23" placeholder="0"></input>
+                            <input
+                                className="subInput"
+                                id="hours"
+                                type="number"
+                                min={0}
+                                max={23}
+                                name="hours"
+                                onChange={this.handleInputChange}
+                                placeholder={0}></input>
                             <br></br>
                             <h5 className="subLabel">Minutes:</h5>
-                            <input className="subInput" id="hours" type="number" min="0" max="59" placeholder="0"></input>
+                            <input
+                                className="subInput"
+                                id="hours"
+                                type="number"
+                                min={0}
+                                max={59}
+                                name="mins"
+                                onChange={this.handleInputChange}
+                                placeholder={0}></input>
                         </div>
                     </FormControl>
 
