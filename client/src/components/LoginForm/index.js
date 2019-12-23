@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
+import ThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
