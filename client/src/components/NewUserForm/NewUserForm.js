@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import MuiThemeProvider from "@material-ui/styles/ThemeProvider/ThemeProvider";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 
-export class LoginForm extends Component {
+export class NewUserForm extends Component {
   state = {
     userName: "",
     password: ""
@@ -23,7 +20,7 @@ export class LoginForm extends Component {
     const values = { userName, password };
 
     return (
-      <MuiThemeProvider>
+      <ThemeProvider>
         <TextField
           hintText="Enter User Name"
           label="User Name"
@@ -42,14 +39,14 @@ export class LoginForm extends Component {
         />
         <br />
         <Button
-          label="Sign In"
+          label="Sign Up"
           primary={true}
           style={styles.button}
           onClick={this.handleButton}
         >
-          Sign In
+          Sign Up
         </Button>
-      </MuiThemeProvider>
+      </ThemeProvider>
     );
   }
 }
@@ -60,4 +57,4 @@ const styles = {
   }
 };
 
-export default LoginForm;
+export default NewUserForm;
