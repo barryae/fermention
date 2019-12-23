@@ -4,9 +4,10 @@ import "./App.css";
 import NewBrew from "./pages/NewBrew";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import LoginForm from "./components/LoginForm/LoginForm";
+import SignUp from "./pages/SignUp";
 import NavBar from "./components/NavBar/Navbar";
 import { Container } from "@material-ui/core";
+
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
               <Route exact path="/home" component={Home} />
               <Route exact path="/newbrew" component={NewBrew} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={SignUp} />
             </div>
           </Router>
         </Container>
