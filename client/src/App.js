@@ -14,7 +14,6 @@ class App extends Component {
       <>
         <NavBar />
         <Container>
-          <LoginPage />
           <Router>
             <div>
               <Route exact path="/" component={Home} />
