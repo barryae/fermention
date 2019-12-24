@@ -77,8 +77,15 @@ class NewBrewForm extends Component {
     addIngredient = event => {
         event.preventDefault();
         let ingredients = this.state.ingredients;
+        let unique = true;
 
-        if (this.state.ingredient) {
+        for (let i = 0; i < ingredients.length; i++) {
+            if (this.state.ingredient.toLowerCase() === ingredients[i].ingredient.toLowerCase()) {
+                unique = false;
+            }
+        }
+
+        if (this.state.ingredient && unique) {
             let newIng = {
                 ingredient: this.state.ingredient,
                 amount: this.state.amount,
@@ -121,8 +128,10 @@ class NewBrewForm extends Component {
             amount: 1,
             units: "mL"
         });
+        if (this.state.title !== "") {
+            console.log(data)
+        }
 
-        console.log(data)
     };
 
     //Renders form
