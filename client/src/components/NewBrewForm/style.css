@@ -32,7 +32,11 @@ h5{
     margin-left: 1em;
 }
 
-#addIngBtn{
+li{
+    margin-bottom: .5em;
+}
+
+#ingBtn{
     margin-left: 1em;
     border-radius: 4px;
     display: inline-block;

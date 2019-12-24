@@ -7,6 +7,7 @@ import "./style.css";
 
 class NewBrewForm extends Component {
 
+    //Sets state
     state = {
         title: "",
         category: "Other",
@@ -17,9 +18,13 @@ class NewBrewForm extends Component {
         days: 0,
         hours: 0,
         mins: 0,
-        picture: ""
+        picture: "",
+        ingredient: "",
+        amount: 1,
+        units: "mL"
     }
 
+    //Handles changes in input
     handleInputChange = event => {
         const { name, value, type } = event.target;
 
@@ -28,12 +33,25 @@ class NewBrewForm extends Component {
         });
     };
 
+    //Handles changes in date
     handleDateChange = date => {
         this.setState({
             startTime: date
         });
     };
 
+    //Deletes specific ingredient
+    deleteIngredient = name => {
+        let filteredArr = this.state.ingredients.filter(function (obj) {
+            return obj.ingredient !== name;
+        });
+
+        this.setState({
+            ingredients: filteredArr
+        });
+    };
+
+    //Adds time from brew lenght to create end time
     calcEndDate = (days, hours, mins) => {
         let endTime = new Date();
         let startTime = this.state.startTime;
@@ -43,6 +61,7 @@ class NewBrewForm extends Component {
         return endTime;
     }
 
+    //Formats brew length
     calcBrewLength = (days, hours, mins) => {
         if (hours < 10) {
             hours = "0" + hours;
@@ -54,11 +73,27 @@ class NewBrewForm extends Component {
         return brewLength;
     }
 
+    //Adds new ingredient
     addIngredient = event => {
         event.preventDefault();
-        alert("ingredient added!")
+        let ingredients = this.state.ingredients;
+
+        if (this.state.ingredient) {
+            let newIng = {
+                ingredient: this.state.ingredient,
+                amount: this.state.amount,
+                units: this.state.units
+            }
+            this.setState({
+                ingredient: "",
+                amount: 1,
+                units: "mL",
+                ingredients: [...ingredients, newIng]
+            });
+        }
     }
 
+    //Creates new brew
     handleSubmit = event => {
         event.preventDefault();
         const data = {
@@ -71,9 +106,26 @@ class NewBrewForm extends Component {
             brewLength: this.calcBrewLength(this.state.days, this.state.hours, this.state.mins),
             picture: this.state.picture
         }
+        this.setState({
+            title: "",
+            category: "Other",
+            description: "",
+            ingredients: [],
+            startTime: new Date(),
+            endTime: new Date(),
+            days: 0,
+            hours: 0,
+            mins: 0,
+            picture: "",
+            ingredient: "",
+            amount: 1,
+            units: "mL"
+        });
+
         console.log(data)
     };
 
+    //Renders form
     render() {
         return (
             <>
@@ -91,7 +143,7 @@ class NewBrewForm extends Component {
                     <FormControl
                         fullWidth={true}>
                         <h6>Category:</h6>
-                        <NativeSelect name="category" onChange={this.handleInputChange}>
+                        <NativeSelect value={this.state.category} name="category" onChange={this.handleInputChange}>
                             <option value={"Other"}>Other</option>
                             <option value={"Beer"}>Beer</option>
                             <option value={"Vinegar"}>Vinegar</option>
@@ -105,24 +157,49 @@ class NewBrewForm extends Component {
                     </FormControl>
                     <FormControl fullWidth={true}>
                         <h6>Ingredients:</h6>
-                        <div id="ingList"></div>
+                        <ul className="ingList">
+                            {this.state.ingredients.map(item => (
+                                <li className="ingListItem" key={item.ingredient}>
+                                    {item.ingredient}: {item.amount}{item.units}
+                                    <button id="ingBtn" onClick={() => this.deleteIngredient(item.ingredient)}>&times;</button>
+                                </li>
+                            ))}
+                        </ul>
                         <div>
                             <h5 className="subLabel">Name:</h5>
-                            <input id="ingName" className="subInput"></input>
+                            <input
+                                value={this.state.ingredient}
+                                id="ingName"
+                                className="subInput"
+                                name="ingredient"
+                                onChange={this.handleInputChange}></input>
                             <br></br>
                             <h5 className="subLabel">Amount:</h5>
-                            <input id="ingAmount" className="subInput" type="number" min="1" placeholder="1"></input>
+                            <input
+                                value={this.state.amount}
+                                id="ingAmount"
+                                className="subInput"
+                                type="number"
+                                min={1}
+                                placeholder={1}
+                                name="amount"
+                                onChange={this.handleInputChange}></input>
                             <br></br>
                             <h5 className="subLabel">Unit:</h5>
-                            <NativeSelect className="subInput" id="ingUnit">
-                                <option value={1}>mL</option>
-                                <option value={2}>L</option>
-                                <option value={3}>mg</option>
-                                <option value={4}>g</option>
-                                <option value={5}>kg</option>
+                            <NativeSelect
+                                value={this.state.units}
+                                className="subInput"
+                                id="ingUnit"
+                                name="units"
+                                onChange={this.handleInputChange}>
+                                <option value={"mL"}>mL</option>
+                                <option value={"L"}>L</option>
+                                <option value={"mg"}>mg</option>
+                                <option value={"g"}>g</option>
+                                <option value={"kg"}>kg</option>
                             </NativeSelect>
                             <br></br>
-                            <button id="addIngBtn" onClick={this.addIngredient}>+</button>
+                            <button id="ingBtn" onClick={this.addIngredient}>+</button>
                         </div>
                     </FormControl>
 
@@ -131,6 +208,7 @@ class NewBrewForm extends Component {
                         <h6>Description:</h6>
                         <TextField
                             multiline
+                            value={this.state.description}
                             onChange={this.handleInputChange}
                             name="description"
                         />
@@ -167,7 +245,10 @@ class NewBrewForm extends Component {
                                 min={0}
                                 name="days"
                                 onChange={this.handleInputChange}
-                                placeholder={0}></input>
+                                placeholder={0}
+                                value={this.state.days}>
+                            </input>
+
                             <br></br>
                             <h5 className="subLabel">Hours:</h5>
                             <input
@@ -177,6 +258,7 @@ class NewBrewForm extends Component {
                                 min={0}
                                 max={23}
                                 name="hours"
+                                value={this.state.hours}
                                 onChange={this.handleInputChange}
                                 placeholder={0}></input>
                             <br></br>
@@ -188,15 +270,16 @@ class NewBrewForm extends Component {
                                 min={0}
                                 max={59}
                                 name="mins"
+                                value={this.state.mins}
                                 onChange={this.handleInputChange}
                                 placeholder={0}></input>
                         </div>
                     </FormControl>
 
                     <FormControl>
-                        <h6>Image Upload:</h6>
+                        <h6>Image:</h6>
                         <Button size="small" variant="contained" color="default" id="uploadBtn">
-                            Upload Image</Button>
+                            Upload</Button>
                     </FormControl>
 
                     <div id="wrapper">
