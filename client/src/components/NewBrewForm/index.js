@@ -232,13 +232,13 @@ class NewBrewForm extends Component {
                                 variant="inline"
                                 format="MM/dd/yyyy"
                                 onChange={this.handleDateChange}
-                                value={this.state.date}
+                                value={this.state.startTime}
                             />
                             <KeyboardTimePicker
                                 margin="normal"
                                 variant="inline"
                                 onChange={this.handleDateChange}
-                                value={this.state.date}
+                                value={this.state.startTime}
                             />
                         </MuiPickersUtilsProvider>
                     </FormControl>
