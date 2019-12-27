@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 // endTime, brewLength
 // Look into AWS S3 buckets for picture submit
 const RecipeSchema = new mongoose.Schema({
-    title: String,
+    title: { type: String, required: true },
     category: String,
     ingredients: [{
         ingredient: String,
