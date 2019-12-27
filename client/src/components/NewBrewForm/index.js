@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Button, TextField, Container, NativeSelect, FormControl, Input, FormHelperText } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardDatePicker, KeyboardTimePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import API from "../../utils/API"
 import "./style.css";
 
 class NewBrewForm extends Component {
@@ -130,6 +131,11 @@ class NewBrewForm extends Component {
         });
         if (this.state.title !== "") {
             console.log(data)
+            API.createRecipe(data)
+                .then(result => {
+                    console.log(result)
+                })
+                .catch(err => console.log(err))
         }
 
     };
