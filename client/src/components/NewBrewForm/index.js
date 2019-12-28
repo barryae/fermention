@@ -106,7 +106,7 @@ class NewBrewForm extends Component {
         const files = event.target.files;
         const data = new FormData();
         data.append('file', files[0]);
-        data.append('upload preset', 'fermention');
+        data.append('upload_preset', 'fermention');
         this.setState({ loading: true });
         const res = await fetch(
             'https://api.cloudinary.com/v1_1/dyiisb9c8/image/upload',
@@ -121,6 +121,9 @@ class NewBrewForm extends Component {
             picture: file.secure_url,
             loading: false
         });
+
+
+
     }
 
     //Creates new brew
@@ -136,23 +139,25 @@ class NewBrewForm extends Component {
             brewLength: this.calcBrewLength(this.state.days, this.state.hours, this.state.mins),
             picture: this.state.picture
         }
-        this.setState({
-            title: "",
-            category: "Other",
-            description: "",
-            ingredients: [],
-            startTime: new Date(),
-            endTime: new Date(),
-            days: 0,
-            hours: 0,
-            mins: 0,
-            picture: "",
-            ingredient: "",
-            amount: 1,
-            units: "mL"
-        });
+
         if (this.state.title !== "") {
             console.log(data)
+            this.setState({
+                title: "",
+                category: "Other",
+                description: "",
+                ingredients: [],
+                startTime: new Date(),
+                endTime: new Date(),
+                days: 0,
+                hours: 0,
+                mins: 0,
+                picture: "",
+                ingredient: "",
+                amount: 1,
+                units: "mL"
+            });
+            this.fileInput.value = "";
         }
 
     };
@@ -312,9 +317,10 @@ class NewBrewForm extends Component {
                         <h6>Image:</h6>
                         <input type="file"
                             name="file"
-                            placeholder="Upload an Image"
                             onChange={this.imageUpload}
+                            ref={ref => this.fileInput = ref}
                         ></input>
+                        <img src={this.state.picture} style={{ width: '200px' }}></img>
                     </FormControl>
 
                     <div id="wrapper">
