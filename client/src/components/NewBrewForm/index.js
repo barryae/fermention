@@ -21,7 +21,8 @@ class NewBrewForm extends Component {
         picture: "",
         ingredient: "",
         amount: 1,
-        units: "mL"
+        units: "mL",
+        loading: false
     }
 
     //Handles changes in input
@@ -98,6 +99,28 @@ class NewBrewForm extends Component {
                 ingredients: [...ingredients, newIng]
             });
         }
+    }
+
+    //image uploading
+    imageUpload = async event => {
+        const files = event.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload preset', 'fermention');
+        this.setState({ loading: true });
+        const res = await fetch(
+            'https://api.cloudinary.com/v1_1/dyiisb9c8/image/upload',
+            {
+                method: 'POST',
+                body: data
+            }
+        )
+        const file = await res.json();
+
+        this.setState({
+            picture: file.secure_url,
+            loading: false
+        });
     }
 
     //Creates new brew
@@ -287,8 +310,11 @@ class NewBrewForm extends Component {
 
                     <FormControl>
                         <h6>Image:</h6>
-                        <Button size="small" variant="contained" color="default" id="uploadBtn">
-                            Upload</Button>
+                        <input type="file"
+                            name="file"
+                            placeholder="Upload an Image"
+                            onChange={this.imageUpload}
+                        ></input>
                     </FormControl>
 
                     <div id="wrapper">
