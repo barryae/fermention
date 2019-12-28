@@ -334,7 +334,12 @@ class NewBrewForm extends Component {
                             onChange={this.imageUpload}
                             ref={ref => this.fileInput = ref}
                         ></input>
-                        <img src={this.state.picture} style={{ width: '200px' }}></img>
+                        {this.state.picture ? (
+                            <img src={this.state.picture} alt="Uploaded Brew" style={{ width: '200px' }}></img>
+                        ) : (
+                                <p>No image uploaded.</p>
+                            )}
+
                     </FormControl>
 
                     <div id="wrapper">
