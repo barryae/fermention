@@ -22,7 +22,8 @@ class NewBrewForm extends Component {
         picture: "",
         ingredient: "",
         amount: 1,
-        units: "mL"
+        units: "mL",
+        loading: false
     }
 
     //Handles changes in input
@@ -101,6 +102,31 @@ class NewBrewForm extends Component {
         }
     }
 
+    //image uploading
+    imageUpload = async event => {
+        const files = event.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'fermention');
+        this.setState({ loading: true });
+        const res = await fetch(
+            'https://api.cloudinary.com/v1_1/dyiisb9c8/image/upload',
+            {
+                method: 'POST',
+                body: data
+            }
+        )
+        const file = await res.json();
+
+        this.setState({
+            picture: file.secure_url,
+            loading: false
+        });
+
+
+
+    }
+
     //Creates new brew
     handleSubmit = event => {
         event.preventDefault();
@@ -114,28 +140,38 @@ class NewBrewForm extends Component {
             brewLength: this.calcBrewLength(this.state.days, this.state.hours, this.state.mins),
             picture: this.state.picture
         }
-        this.setState({
-            title: "",
-            category: "Other",
-            description: "",
-            ingredients: [],
-            startTime: new Date(),
-            endTime: new Date(),
-            days: 0,
-            hours: 0,
-            mins: 0,
-            picture: "",
-            ingredient: "",
-            amount: 1,
-            units: "mL"
-        });
+
+        //Only uploads to database if title exists
         if (this.state.title !== "") {
             console.log(data)
+
+            //Runs API function
             API.createRecipe(data)
                 .then(result => {
                     console.log(result)
                 })
                 .catch(err => console.log(err))
+
+            //Resets state
+            this.setState({
+                title: "",
+                category: "Other",
+                description: "",
+                ingredients: [],
+                startTime: new Date(),
+                endTime: new Date(),
+                days: 0,
+                hours: 0,
+                mins: 0,
+                picture: "",
+                ingredient: "",
+                amount: 1,
+                units: "mL"
+            });
+
+            //Resets file input
+            this.fileInput.value = "";
+
         }
 
     };
@@ -293,8 +329,17 @@ class NewBrewForm extends Component {
 
                     <FormControl>
                         <h6>Image:</h6>
-                        <Button size="small" variant="contained" color="default" id="uploadBtn">
-                            Upload</Button>
+                        <input type="file"
+                            name="file"
+                            onChange={this.imageUpload}
+                            ref={ref => this.fileInput = ref}
+                        ></input>
+                        {this.state.picture ? (
+                            <img src={this.state.picture} alt="Uploaded Brew" style={{ width: '200px' }}></img>
+                        ) : (
+                                <p>No image uploaded.</p>
+                            )}
+
                     </FormControl>
 
                     <div id="wrapper">
