@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Paper } from "@material-ui/core";
 import Timer from "../Timer"
-import { PromiseProvider } from "mongoose";
 
 const useStyles = makeStyles(theme => ({
   root: {
