@@ -36,10 +36,14 @@ const NavBar = () => {
             Fermention
           </Typography>
           <Button>
-            <Link color="inherit" href="/home">Home</Link>
+            <Link color="inherit" href="/home">
+              Home
+            </Link>
           </Button>
           <Button>
-            <Link color="inherit" href="/newbrew">New Brew</Link>
+            <Link color="inherit" href="/newbrew">
+              New Brew
+            </Link>
           </Button>
           <Button>
             <Link color="inherit">Log In</Link>
