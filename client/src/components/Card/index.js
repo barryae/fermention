@@ -16,36 +16,32 @@ const Card = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Grid container direction="column-reverse" justify="center" spacing={2}>
-        <Grid item xs={12} sm={8}>
-          <Paper className={classes.paper} variant="outlined" elevation={2}>
-            <Grid container direction="row">
-              <Grid item>
-                <Typography variant="h5">Title Name</Typography>
-              </Grid>
-              <Grid item>
-                <Avatar alt="User Picture Here">B</Avatar>
-              </Grid>
-            </Grid>
-            <Grid container direction="row">
-              <Grid item>
-                <img src="" alt="Brew Image Here" />
-              </Grid>
-              <Grid item>
-                <Typography variant="p">Ingredients:</Typography>
-                <Typography variant="p">Description:</Typography>
-              </Grid>
-            </Grid>
-            <Grid container direction="row">
-              <Grid item>
-                <Typography variant="p">Timer goes here</Typography>
-              </Grid>
-            </Grid>
-          </Paper>
+    <Grid item xs={12} sm={8}>
+      <Paper className={classes.paper} variant="outlined" elevation={2}>
+        <Grid container direction="row">
+          <Grid item>
+            <Typography variant="h5">Title Name</Typography>
+          </Grid>
+          <Grid item>
+            <Avatar alt="User Picture Here">B</Avatar>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+        <Grid container direction="row">
+          <Grid item>
+            <img src="" alt="Brew Image Here" />
+          </Grid>
+          <Grid item>
+            <Typography variant="body1">Ingredients:</Typography>
+            <Typography variant="body1">Description:</Typography>
+          </Grid>
+        </Grid>
+        <Grid container direction="row">
+          <Grid item>
+            <Typography variant="body1">Timer goes here</Typography>
+          </Grid>
+        </Grid>
+      </Paper>
+    </Grid>
   );
 };
 
