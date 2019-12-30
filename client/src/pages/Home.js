@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { List, ListItem } from "../components/List"
 import API from "../utils/API"
+import Timer from "../components/Timer"
 
 
 class Home extends Component {
@@ -71,6 +72,7 @@ class Home extends Component {
                                     <p>
                                         {recipe.brewLength}
                                     </p>
+                                    <Timer endTime={recipe.endTime}></Timer>
                                 </div>
                             </ListItem>
                         ))}
