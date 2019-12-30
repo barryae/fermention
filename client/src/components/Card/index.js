@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   paper: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     marginBottom: theme.spacing(3)
   }
 }));
@@ -18,17 +18,17 @@ const Card = () => {
   return (
     <div className={classes.root}>
       <Grid container direction="column-reverse" justify="center" spacing={2}>
-        <Grid item>
+        <Grid item xs={12} sm={8}>
           <Paper className={classes.paper} variant="outlined" elevation={2}>
-            <Grid contianer direction="row">
+            <Grid container direction="row">
               <Grid item>
-                <Typography variant="h3">Title Name</Typography>
+                <Typography variant="h5">Title Name</Typography>
               </Grid>
               <Grid item>
                 <Avatar alt="User Picture Here">B</Avatar>
               </Grid>
             </Grid>
-            <Grid contianer direction="row">
+            <Grid container direction="row">
               <Grid item>
                 <img src="" alt="Brew Image Here" />
               </Grid>
@@ -37,9 +37,9 @@ const Card = () => {
                 <Typography variant="p">Description:</Typography>
               </Grid>
             </Grid>
-            <Grid contianer direction="row">
+            <Grid container direction="row">
               <Grid item>
-                <Typography variant="h5">Timer goes here</Typography>
+                <Typography variant="p">Timer goes here</Typography>
               </Grid>
             </Grid>
           </Paper>
