@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Card = () => {
+const Card = (props) => {
   const classes = useStyles();
 
   return (
@@ -20,7 +20,7 @@ const Card = () => {
       <Paper className={classes.paper} variant="outlined" elevation={2}>
         <Grid container direction="row">
           <Grid item>
-            <Typography variant="h5">Title Name</Typography>
+            <Typography variant="h5">{props.title}</Typography>
           </Grid>
           <Grid item>
             <Avatar alt="User Picture Here">B</Avatar>

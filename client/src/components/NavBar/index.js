@@ -29,7 +29,7 @@ const NavBar = () => {
         <Toolbar>
           <Avatar
             variant="square"
-            src="/broken-image.jpg"
+            src="../logo192.png"
             className={classes.avatar}
           />
           <Typography variant="h4" className={classes.title}>
