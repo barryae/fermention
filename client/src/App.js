@@ -5,9 +5,8 @@ import NewBrew from "./pages/NewBrew";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import NavBar from "./components/NavBar/Navbar";
+import NavBar from "./components/NavBar";
 import { Container } from "@material-ui/core";
-
 
 class App extends Component {
   render() {
