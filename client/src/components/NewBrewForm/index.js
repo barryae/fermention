@@ -5,11 +5,13 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker, KeyboardTimePicker } from 
 import DateFnsUtils from '@date-io/date-fns';
 import API from "../../utils/API"
 import "./style.css";
+import UserContext from '../../context/UserContext';
 
 class NewBrewForm extends Component {
 
     //Sets state
     state = {
+        user: "jim",
         title: "",
         category: "Other",
         description: "",
@@ -33,6 +35,7 @@ class NewBrewForm extends Component {
         this.setState({
             [name]: type === 'number' ? parseInt(value) : value
         });
+
     };
 
     //Handles changes in date
@@ -131,6 +134,7 @@ class NewBrewForm extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const data = {
+            user: this.state.user,
             title: this.state.title,
             category: this.state.category,
             ingredients: this.state.ingredients,
