@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import API from "../utils/API"
-import Timer from "../components/Timer"
-import UserContext from "../context/UserContext";
 import Card from "../components/Card"
 import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText } from '@material-ui/core';
 
