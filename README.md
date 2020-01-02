@@ -1,6 +1,6 @@
 # **Fermention**
 
-Bringing culture back to the social biome.
+Bringing "culture" back to the social biome.
 
 ## **Proposal**
 
