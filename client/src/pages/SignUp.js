@@ -1,9 +1,9 @@
 import React from "react";
-import SignUp from "../components/SignUp"
+import SignUpForm from "../components/SignUpForm"
 
 function SignUpPage() {
     return (
-        <SignUp />
+        <SignUpForm />
     );
 }
 

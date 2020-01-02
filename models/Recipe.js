@@ -16,7 +16,8 @@ const RecipeSchema = new mongoose.Schema({
     startTime: Date,
     endTime: Date,
     brewLength: String,
-    picture: String
+    picture: String,
+    user: String
 })
 
 module.exports = mongoose.model("Recipe", RecipeSchema)

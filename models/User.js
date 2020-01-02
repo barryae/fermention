@@ -9,7 +9,9 @@ const UserSchema = new Schema({
         index: {
             unique: true
         },
+
     },
+
     password: String,
     recipes: [
         {
