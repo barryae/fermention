@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../../../models/User");
 const jwt = require("jsonwebtoken");
 
 module.exports = function (req, res, next) {
@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
         const token = authorization.replace("Bearer ", "");
         const decoded = jwt.verify(token, process.env.KEY);
 
-        User.findOne({ _id: decoded.data }).then(function (dbUser) {
+        db.User.findOne({ _id: decoded.data }).then(function (dbUser) {
             req.user = dbUser
             next();
         });

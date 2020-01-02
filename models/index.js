@@ -1,4 +1,4 @@
 module.exports = {
     Recipe: require("./recipe"),
-    User: require("./user")
+    User: require("./User")
 }
