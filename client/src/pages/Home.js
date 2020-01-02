@@ -1,91 +1,164 @@
 import React, { Component } from "react";
-import { List, ListItem } from "../components/List"
 import API from "../utils/API"
 import Timer from "../components/Timer"
 import UserContext from "../context/UserContext";
+import Card from "../components/Card"
+import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText } from '@material-ui/core';
+
 
 class Home extends Component {
     state = {
+        database: [],
         recipes: [],
-        title: "",
-        user: "",
-        description: "",
-        ingredients: [],
-        picture: "",
-        startTime: "",
-        endTime: "",
-        brewLength: ""
+        category: "All",
+        ingredient: "",
+        brewStatus: "All"
     }
 
     componentDidMount() {
         this.loadRecipes();
     }
 
+    //Filters by chosen category
+    categoryFilter() {
+        if (this.state.category !== "All") {
+            const result = this.state.database.filter(recipe => recipe.category === this.state.category);
+            this.setState({ recipes: result })
+        } else {
+            this.setState({ recipes: this.state.database })
+        }
+    }
+
+    //Filters by brew status
+    statusFilter() {
+
+        if (this.state.brewStatus === "Finished") {
+            const result = this.state.database.filter(recipe => new Date(recipe.endTime) < new Date());
+            this.setState({ recipes: result })
+        } else if (this.state.brewStatus === "Brewing") {
+
+            const result = this.state.database.filter(recipe => new Date(recipe.endTime) > new Date());
+            this.setState({ recipes: result })
+
+        } else if (this.state.brewStatus === "All") {
+            this.setState({ recipes: this.state.database })
+        }
+    }
+
+    //Searches array for ingredients
+    ingredientSearch() {
+        const searchTerm = this.state.ingredient;
+        if (searchTerm !== "") {
+            const result = this.state.database.filter(
+                function (recipe) {
+                    if (recipe.ingredients.length !== 0) {
+                        for (let i = 0; i < recipe.ingredients.length; i++) {
+                            if (recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()) {
+                                return recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()
+                            };
+                        }
+                        return null;
+                    } else {
+                        return null;
+                    }
+                });
+            this.setState({ recipes: result })
+        } else {
+            this.setState({ recipes: this.state.database })
+        }
+    }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        }, () => {
+            if (name === "category") {
+                this.categoryFilter();
+            }
+            else if (name === "ingredient") {
+                this.ingredientSearch();
+            }
+            else if (name === "brewStatus") {
+                this.statusFilter();
+            }
+        });
+    };
+
     loadRecipes = () => {
         API.getAllRecipes()
             .then(res =>
                 this.setState({
-                    recipes: res.data,
-                    title: "",
-                    user: "",
-                    description: "",
-                    ingredients: [],
-                    picture: "",
-                    startTime: "",
-                    endTime: "",
-                    brewLength: ""
+                    database: res.data,
+                    recipes: res.data
                 }))
     }
 
     render() {
         return (
-            <div>
-                <UserContext.Consumer>
-                    {context => <>
-                        <h1>Here is the home page where the feed is!</h1>
-                        {this.state.recipes.length ? (
-                            <List>
-                                {this.state.recipes.map(recipe => (
-                                    <ListItem key={recipe._id}>
-                                        <p>
-                                            <strong>
-                                                {recipe.title} by {recipe.user ? recipe.user : "Unknown User"}
-                                            </strong>
-                                        </p>
-                                        <div>
-                                            {recipe.description}
-                                            <p>
-                                                <strong>Ingredients:</strong>
-                                            </p>
-                                            {recipe.ingredients.map(ingredient => (
-                                                <p>
-                                                    {ingredient.ingredient}{ingredient.amount}{ingredient.units}
-                                                </p>
-                                            ))}
-                                            <p>
-                                                <strong>Date When Complete:</strong>
-                                            </p>
-                                            <p>
-                                                {recipe.endTime < Date.now ? recipe.endTime : "Finished"}
-                                            </p>
-                                            <p>
-                                                <strong>Total Brew Time:</strong>
-                                            </p>
-                                            <p>
-                                                {recipe.brewLength}
-                                            </p>
-                                            <Timer endTime={recipe.endTime}></Timer>
-                                        </div>
-                                    </ListItem>
-                                ))}
-                            </List>
-                        ) : (
-                                <h3>No Results to Display</h3>
-                            )
-                        }
-                    </>}
-                </UserContext.Consumer>
-            </div>
+            <Grid container justify="center">
+                <Grid item xs={12} sm={8}>
+                    <FormControl
+                        fullWidth={true}>
+                        <InputLabel>Search Ingredients</InputLabel>
+                        <Input
+                            value={this.state.ingredient}
+                            name="ingredient"
+                            onChange={this.handleInputChange} />
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <FormControl
+                        fullWidth={true}>
+                        <NativeSelect value={this.state.category} name="category" onChange={this.handleInputChange}>
+                            <option value={"All"}>All</option>
+                            <option value={"Beer"}>Beer</option>
+                            <option value={"Vinegar"}>Vinegar</option>
+                            <option value={"Bread"}>Bread</option>
+                            <option value={"Pickle"}>Pickle</option>
+                            <option value={"Kombucha"}>Kombucha</option>
+                            <option value={"Miso"}>Miso</option>
+                            <option value={"Wine"}>Wine</option>
+                            <option value={"Kimchi"}>Kimchi</option>
+                            <option value={"Other"}>Other</option>
+                        </NativeSelect>
+                        <FormHelperText>Filter by Category</FormHelperText>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <FormControl
+                        fullWidth={true}>
+                        <NativeSelect value={this.state.status} name="brewStatus" onChange={this.handleInputChange}>
+                            <option value={"All"}>All</option>
+                            <option value={"Finished"}>Finished</option>
+                            <option value={"Brewing"}>Currently Brewing</option>
+
+                        </NativeSelect>
+                        <FormHelperText>Filter by Brewing Status</FormHelperText>
+                    </FormControl>
+                </Grid>
+                {this.state.recipes.length > 0 ? (
+                    <>
+                        {this.state.recipes.map(recipe => (
+
+
+                            <Card key={recipe._id}
+                                id={recipe._id}
+                                title={recipe.title}
+                                description={recipe.description}
+                                user={recipe.user}
+                                picture={recipe.picture}
+                                ingredients={recipe.ingredients}
+                                endTime={recipe.endTime}
+                                brewLength={recipe.brewLength}></Card>
+
+                        ))}
+                    </>
+                ) : (
+                        <Grid item xs={12} sm={8} ><h3>No Results to Display</h3></Grid>
+                    )
+                }
+            </Grid>
         )
     };
 }

@@ -29,17 +29,21 @@ const NavBar = () => {
         <Toolbar>
           <Avatar
             variant="square"
-            src="/broken-image.jpg"
+            src="../logo192.png"
             className={classes.avatar}
           />
           <Typography variant="h4" className={classes.title}>
             Fermention
           </Typography>
           <Button>
-            <Link color="inherit" href="/home">Home</Link>
+            <Link color="inherit" href="/home">
+              Home
+            </Link>
           </Button>
           <Button>
-            <Link color="inherit" href="/newbrew">New Brew</Link>
+            <Link color="inherit" href="/newbrew">
+              New Brew
+            </Link>
           </Button>
           <Button>
             <Link color="inherit" href="/login">Log In</Link>

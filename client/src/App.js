@@ -5,7 +5,7 @@ import NewBrew from "./pages/NewBrew";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import NavBar from "./components/NavBar/Navbar";
+import NavBar from "./components/NavBar";
 import { Container } from "@material-ui/core";
 import authenticatedAxios from "./utils/AuthenticatedAxios"
 import UserContext from "./context/UserContext"
