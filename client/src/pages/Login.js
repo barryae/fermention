@@ -1,9 +1,9 @@
 import React from "react";
-import SignIn from "../components/SignIn_hooks";
+import LoginForm from "../components/LogInForm";
 
 function Login() {
     return (
-        <SignIn />
+        <LoginForm />
     );
 }
 

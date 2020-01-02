@@ -9,8 +9,10 @@ const UserSchema = new Schema({
         index: {
             unique: true
         },
-        password: String
+
     },
+
+    password: String,
     recipes: [
         {
             type: Schema.Types.ObjectId,

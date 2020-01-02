@@ -37,18 +37,18 @@ class App extends Component {
       <>
         <Container>
           <Router>
-            <NavBar />
-            <ProtectedRoute exact path="/" component={Home} />
-            <ProtectedRoute exact path="/home" component={Home} />
-            <ProtectedRoute exact path="/newbrew" component={NewBrew} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={SignUp} />
             <UserContext.Provider
               value={{
                 user: user,
                 setUser: setUser
               }}
             >
+              <NavBar />
+              <ProtectedRoute exact path="/" component={Home} />
+              <ProtectedRoute exact path="/home" component={Home} />
+              <ProtectedRoute exact path="/newbrew" component={NewBrew} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={SignUp} />
             </UserContext.Provider>
           </Router>
         </Container>
