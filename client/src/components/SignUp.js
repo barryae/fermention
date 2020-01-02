@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { withRouter } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import Auth from "../utils/Auth";
+import API from "../"
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -49,7 +49,7 @@ function SignUp(props) {
         e.preventDefault();
         const { username, password } = this.state;
         if (username && password) {
-            Auth.logIn(username, password, (response) => {
+            API.logIn(username, password, (response) => {
                 this.context.setUser(response);
                 this.props.history.push("/");
             });
