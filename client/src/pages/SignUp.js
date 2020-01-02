@@ -1,10 +1,10 @@
 import React from "react";
-import NewUserForm from "../components/NewUserForm";
+import SignUp from "../components/SignUp"
 
-function SignUp() {
+function SignUpPage() {
     return (
-        <NewUserForm />
+        <SignUp />
     );
 }
 
-export default SignUp;
+export default SignUpPage;

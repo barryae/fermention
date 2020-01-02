@@ -42,7 +42,7 @@ const NavBar = () => {
             <Link color="inherit" href="/newbrew">New Brew</Link>
           </Button>
           <Button>
-            <Link color="inherit">Log In</Link>
+            <Link color="inherit" href="/login">Log In</Link>
           </Button>
         </Toolbar>
       </AppBar>

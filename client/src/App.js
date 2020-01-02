@@ -7,20 +7,49 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NavBar from "./components/NavBar/Navbar";
 import { Container } from "@material-ui/core";
-
+import authenticatedAxios from "./utils/AuthenticatedAxios"
+import UserContext from "./context/UserContext"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 class App extends Component {
+  state = {
+    user: null
+  }
+
+  setUser = user => {
+    this.setState({ user })
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem("token")
+    if (token) {
+      authenticatedAxios
+        .get("/api/authenticate")
+        .then(response => this.setUser(response.data))
+    }
+  }
+
+
   render() {
+    const { user } = this.state;
+    const setUser = this.setUser
     return (
       <>
         <Container>
           <Router>
             <NavBar />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/newbrew" component={NewBrew} />
+            <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute exact path="/home" component={Home} />
+            <ProtectedRoute exact path="/newbrew" component={NewBrew} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
+            <UserContext.Provider
+              value={{
+                user: user,
+                setUser: setUser
+              }}
+            >
+            </UserContext.Provider>
           </Router>
         </Container>
       </>

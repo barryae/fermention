@@ -9,7 +9,6 @@ module.exports = {
             })
             .then(dbUser => {
                 res.json(dbUser)
-                console.log(res.json(dbUser))
             })
             .catch(err => {
                 res.status(422).json(err)
@@ -21,7 +20,6 @@ module.exports = {
             .sort({ brewStart: -1 })
             .then(dbRecipes => {
                 res.json(dbRecipes)
-                console.log(res.json(dbRecipes))
             })
             .catch(err => {
                 res.json({ message: err })
