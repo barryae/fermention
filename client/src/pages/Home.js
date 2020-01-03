@@ -17,52 +17,51 @@ class Home extends Component {
         this.loadRecipes();
     }
 
+    filterFeed() {
+        const filteredrecipes = this.state.database.filter(recipe => {
+            let isMatch = true;
+            if (this.state.category !== "All") {
+                isMatch = isMatch && this.categoryFilter(recipe);
+            }
+
+            if (this.state.search) {
+                isMatch = isMatch && this.ingredientFilter(recipe);
+            }
+
+            if (this.state.brewStatus !== "All") {
+                isMatch = isMatch && this.statusFilter(recipe);
+            }
+            return isMatch;
+        });
+        this.setState({ recipes: filteredrecipes });
+    }
+
     //Filters by chosen category
-    categoryFilter() {
-        if (this.state.category !== "All") {
-            const result = this.state.database.filter(recipe => recipe.category === this.state.category);
-            this.setState({ recipes: result })
-        } else {
-            this.setState({ recipes: this.state.database })
-        }
+    categoryFilter(recipe) {
+        return recipe.category === this.state.category;
     }
 
     //Filters by brew status
-    statusFilter() {
-
+    statusFilter(recipe) {
         if (this.state.brewStatus === "Finished") {
-            const result = this.state.database.filter(recipe => new Date(recipe.endTime) < new Date());
-            this.setState({ recipes: result })
+            return new Date(recipe.endTime) < new Date();
         } else if (this.state.brewStatus === "Brewing") {
-
-            const result = this.state.database.filter(recipe => new Date(recipe.endTime) > new Date());
-            this.setState({ recipes: result })
-
-        } else if (this.state.brewStatus === "All") {
-            this.setState({ recipes: this.state.database })
+            return new Date(recipe.endTime) > new Date();
         }
     }
 
     //Searches array for ingredients
-    ingredientSearch() {
+    ingredientFilter(recipe) {
         const searchTerm = this.state.search;
-        if (searchTerm !== "") {
-            const result = this.state.database.filter(
-                function (recipe) {
-                    if (recipe.ingredients.length !== 0) {
-                        for (let i = 0; i < recipe.ingredients.length; i++) {
-                            if (recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()) {
-                                return recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()
-                            };
-                        }
-                        return null;
-                    } else {
-                        return null;
-                    }
-                });
-            this.setState({ recipes: result })
+        if (recipe.ingredients.length !== 0) {
+            for (let i = 0; i < recipe.ingredients.length; i++) {
+                if (recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()) {
+                    return recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()
+                }
+            }
+            return false;
         } else {
-            this.setState({ recipes: this.state.database })
+            return false;
         }
     }
 
@@ -71,15 +70,7 @@ class Home extends Component {
         this.setState({
             [name]: value
         }, () => {
-            if (name === "category") {
-                this.ingredientSearch();
-            }
-            else if (name === "search") {
-                this.ingredientSearch();
-            }
-            else if (name === "brewStatus") {
-                this.ingredientSearch();
-            }
+            this.filterFeed();
         });
     };
 
