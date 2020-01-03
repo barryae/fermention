@@ -34,10 +34,8 @@ module.exports = {
             })
     },
     userGet: function (req, res) {
-        db.User
-            .findById(req._id)
-            .then(dbUser => {
-                res.json(dbUser);
-            })
+        // this needs to be used in order to make our user state persist
+        const { password, __v, ...user } = req.user.toObject();
+        res.json(user);
     }
 }

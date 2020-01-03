@@ -1,9 +1,8 @@
 import axios from "axios";
 
-function Auth () {
+function Auth() {
 
-	function logIn (username, password, cb) {
-		//CODE GOES HERE
+	function logIn(username, password, cb) {
 		axios.post("/api/authenticate", { username: username, password: password })
 			.then(response => {
 				localStorage.setItem("token", response.data.token);
@@ -11,16 +10,16 @@ function Auth () {
 			});
 	}
 
-	function logOut (cb) {
+	function logOut(cb) {
 		localStorage.removeItem("token");
 		cb();
 	}
 
-	function getToken () {
+	function getToken() {
 		return localStorage.getItem("token");
 	}
 
-	function isLoggedIn () {
+	function isLoggedIn() {
 		const token = localStorage.getItem("token");
 		if (token) {
 			return true;
