@@ -9,7 +9,7 @@ class Home extends Component {
         database: [],
         recipes: [],
         category: "All",
-        ingredient: "",
+        search: "",
         brewStatus: "All"
     }
 
@@ -45,7 +45,7 @@ class Home extends Component {
 
     //Searches array for ingredients
     ingredientSearch() {
-        const searchTerm = this.state.ingredient;
+        const searchTerm = this.state.search;
         if (searchTerm !== "") {
             const result = this.state.database.filter(
                 function (recipe) {
@@ -72,13 +72,13 @@ class Home extends Component {
             [name]: value
         }, () => {
             if (name === "category") {
-                this.categoryFilter();
+                this.ingredientSearch();
             }
-            else if (name === "ingredient") {
+            else if (name === "search") {
                 this.ingredientSearch();
             }
             else if (name === "brewStatus") {
-                this.statusFilter();
+                this.ingredientSearch();
             }
         });
     };
@@ -100,8 +100,8 @@ class Home extends Component {
                         fullWidth={true}>
                         <InputLabel>Search Ingredients</InputLabel>
                         <Input
-                            value={this.state.ingredient}
-                            name="ingredient"
+                            value={this.state.search}
+                            name="search"
                             onChange={this.handleInputChange} />
                     </FormControl>
                 </Grid>
