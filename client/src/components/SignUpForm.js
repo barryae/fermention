@@ -108,8 +108,6 @@ function SignUp(props) {
           })
         );
       }
-    } else {
-      alert("There was an error. Please try again.");
     }
   };
 
