@@ -11,6 +11,14 @@ export default {
         return axios.get("/api/authenticate", input);
     },
 
+    getUser: function () {
+        return axios.get("/api/me", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+    },
+
     createRecipe: function (recipe) {
         return axios.post("/api/recipes", recipe);
     },

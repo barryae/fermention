@@ -1,12 +1,10 @@
 import axios from "axios";
 
 function Auth() {
+
   function logIn(username, password, cb) {
-    //CODE GOES HERE
-    axios
-      .post("/api/authenticate", { username: username, password: password })
+    axios.post("/api/authenticate", { username: username, password: password })
       .then(response => {
-        console.log(response);
         localStorage.setItem("token", response.data.token);
         cb(response.data);
       });
@@ -35,7 +33,7 @@ function Auth() {
     logIn,
     logOut,
     getToken
-  };
+  }
 }
 
 export default Auth();

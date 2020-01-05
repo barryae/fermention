@@ -7,9 +7,9 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NavBar from "./components/NavBar";
 import { Container } from "@material-ui/core";
-import authenticatedAxios from "./utils/AuthenticatedAxios"
 import UserContext from "./context/UserContext"
 import ProtectedRoute from "./components/ProtectedRoute"
+import API from "./utils/API"
 
 class App extends Component {
   state = {
@@ -17,15 +17,18 @@ class App extends Component {
   }
 
   setUser = user => {
-    this.setState({ user })
+    this.setState({ user: user })
   }
 
   componentDidMount() {
     const token = localStorage.getItem("token")
     if (token) {
-      authenticatedAxios
-        .get("/api/authenticate")
-        .then(response => this.setUser(response.data))
+      console.log(token)
+      API.getUser()
+        .then(response => {
+          console.log(response)
+          this.setUser(response.data)
+        })
     }
   }
 
