@@ -149,12 +149,12 @@ class NewBrewForm extends Component {
 
         //Only uploads to database if title exists
         if (this.state.title !== "") {
-            console.log(data)
+            // console.log(data)
 
             //Runs API function
             API.createRecipe(data)
                 .then(result => {
-                    console.log(result)
+                    // console.log(result)
                 })
                 .catch(err => console.log(err))
 
@@ -184,7 +184,7 @@ class NewBrewForm extends Component {
 
     //Renders form
     render() {
-        console.log(this.context.user);
+        // console.log(this.context.user);
         return (
             <>
                 <Container maxWidth="sm">
