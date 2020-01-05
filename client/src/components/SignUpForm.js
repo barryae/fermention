@@ -100,7 +100,7 @@ function SignUp(props) {
           password: password
         };
         API.signup(data, response => {
-          console.log(response);
+
         }).then(
           Auth.logIn(username, password, response => {
             user.setUser(response);
@@ -114,9 +114,6 @@ function SignUp(props) {
   };
 
   const classes = useStyles();
-
-  console.log(formErrors);
-  console.log(formValues);
 
   return (
     <Container component="main" maxWidth="xs">
