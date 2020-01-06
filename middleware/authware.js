@@ -1,4 +1,4 @@
-const db = require("../../../models/User");
+const db = require("../models");
 const jwt = require("jsonwebtoken");
 
 module.exports = function (req, res, next) {
