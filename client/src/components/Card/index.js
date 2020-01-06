@@ -9,11 +9,13 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(2)
   },
   image: {
     margin: theme.spacing(3),
-    marginTop: theme.spacing(0)
+    marginTop: theme.spacing(0),
+    marginLeft: theme.spacing(0)
   }
 }));
 
