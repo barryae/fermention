@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText } from '@material-ui/core';
 
 
+
 class Home extends Component {
     state = {
         database: [],
@@ -85,7 +86,7 @@ class Home extends Component {
 
     render() {
         return (
-            <Grid container justify="center" spacing={4}>
+            <Grid container justify="center" spacing={6}>
                 <Grid item xs={12} sm={8} >
                     <FormControl
                         fullWidth={true}>
@@ -97,8 +98,8 @@ class Home extends Component {
                     </FormControl>
                 </Grid>
 
-                <Grid container xs={12} sm={8} spacing={4}>
-                    <Grid item xs={12} sm={6} >
+                <Grid container justify="center" spacing={6}>
+                    <Grid item xs={12} sm={4} >
                         <FormControl
                             fullWidth={true}>
                             <NativeSelect value={this.state.category} name="category" onChange={this.handleInputChange}>
@@ -117,7 +118,7 @@ class Home extends Component {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12} sm={6} >
+                    <Grid item xs={12} sm={4} >
                         <FormControl
                             fullWidth={true}>
                             <NativeSelect value={this.state.status} name="brewStatus" onChange={this.handleInputChange}>
@@ -158,6 +159,7 @@ class Home extends Component {
                     }
                 </Grid>
             </Grid>
+
         )
     };
 }

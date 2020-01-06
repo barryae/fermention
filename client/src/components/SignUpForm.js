@@ -83,6 +83,8 @@ function SignUp(props) {
         newFormErrors.confirmPassword =
           formValues.password !== value ? "Must match Password" : "";
         break;
+      default:
+        break;
     }
     setFormErrors(newFormErrors);
   };

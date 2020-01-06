@@ -5,13 +5,14 @@ import NewBrew from "./pages/NewBrew";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import NavBar from "./components/NavBar";
 import { Container } from "@material-ui/core";
 import UserContext from "./context/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import API from "./utils/API";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import NavBar from "./components/NavBar";
+import Auth from "./utils/Auth";
 
 
 const theme = createMuiTheme({
@@ -46,19 +47,20 @@ class App extends Component {
 
   render() {
     const { user } = this.state;
-    const setUser = this.setUser
+    const setUser = this.setUser;
+    let loggedIn = Auth.isLoggedIn();
     return (
       <>
         <ThemeProvider theme={theme}>
           <Container>
             <Router>
+              <NavBar loggedIn={loggedIn} />
               <UserContext.Provider
                 value={{
                   user: user,
                   setUser: setUser
                 }}
               >
-                <NavBar />
                 <ProtectedRoute exact path="/" component={Home} />
                 <ProtectedRoute exact path="/home" component={Home} />
                 <ProtectedRoute exact path="/newbrew" component={NewBrew} />

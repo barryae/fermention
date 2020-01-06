@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import API from "../utils/API"
-import Card from "../components/Card"
+import API from "../utils/API";
+import Card from "../components/Card";
 import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText } from '@material-ui/core';
 
 
@@ -88,6 +88,7 @@ class Profile extends Component {
 
     render() {
         return (
+
             <Grid container justify="center">
                 <Grid item xs={12} sm={8}>
                     <FormControl
@@ -151,6 +152,7 @@ class Profile extends Component {
                     )
                 }
             </Grid>
+
         )
     };
 }
