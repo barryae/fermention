@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Paper } from "@material-ui/core";
-import Timer from "../Timer"
+import Timer from "../Timer";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -9,11 +9,17 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(2)
+  },
+  image: {
+    margin: theme.spacing(3),
+    marginTop: theme.spacing(0),
+    marginLeft: theme.spacing(0)
   }
 }));
 
-const Card = (props) => {
+const Card = props => {
   const classes = useStyles();
 
   return (
@@ -24,33 +30,52 @@ const Card = (props) => {
             <Typography variant="h5">{props.title}</Typography>
           </Grid>
           <Grid item>
-            <Typography variant="h5">&nbsp;by {props.user ? props.user : "Anonymous User"}</Typography>
-          </Grid>
-        </Grid>
-        <Grid container direction="row">
-          <Grid item>
-            <img src={props.picture !== "" ? props.picture : "./images/fermention-default.jpg"} style={{ width: '200px' }} alt="User Brew" />
-          </Grid>
-          <Grid item>
-            <Typography variant="body1">
-              Ingredients:</Typography>{props.ingredients.length > 0 ? (props.ingredients.map(ingredient => (
-                <p key={ingredient.ingredient}>
-                  {ingredient.ingredient}&nbsp;{ingredient.amount}{ingredient.units}
-                </p>
-              ))) : ("(None Listed)")}
-
-            <Typography variant="body1">
-              Description: {props.description ? props.description : "(Not Provided)"}
+            <Typography variant="h5">
+              &nbsp;by {props.user ? props.user : "Anonymous User"}
             </Typography>
           </Grid>
         </Grid>
         <Grid container direction="row">
           <Grid item>
-            <Typography variant="body1">Total Brew Time: {props.brewLength}</Typography>
+            <img
+              className={classes.image}
+              src={
+                props.picture !== ""
+                  ? props.picture
+                  : "./images/fermention-default.jpg"
+              }
+              style={{ width: "200px" }}
+              alt="User Brew"
+            />
+          </Grid>
+          <Grid item>
+            <Typography variant="body1">Ingredients:</Typography>
+            {props.ingredients.length > 0
+              ? props.ingredients.map(ingredient => (
+                  <p key={ingredient.ingredient}>
+                    {ingredient.ingredient}&nbsp;{ingredient.amount}
+                    {ingredient.units}
+                  </p>
+                ))
+              : "(None Listed)"}
+
+            <Typography variant="body1">
+              Description:{" "}
+              {props.description ? props.description : "(Not Provided)"}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container direction="row">
+          <Grid item>
+            <Typography variant="body1">
+              Total Brew Time: {props.brewLength}
+            </Typography>
           </Grid>
           <Grid container direction="row">
             <Grid item>
-              <Typography variant="body1">Brewing Status: <Timer endTime={props.endTime}></Timer></Typography>
+              <Typography variant="body1">
+                Brewing Status: <Timer endTime={props.endTime}></Timer>
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
