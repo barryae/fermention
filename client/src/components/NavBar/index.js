@@ -32,6 +32,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+let Auth = localStorage.token;
+
 const NavBar = () => {
   const classes = useStyles();
   return (
@@ -46,19 +48,19 @@ const NavBar = () => {
           <Typography variant="h4" className={classes.title}>
             Fermention
           </Typography>
-          <Button>
+          {Auth ? <><Button>
             <Link color="inherit" to="/home" className={classes.link}>
               Home
             </Link>
           </Button>
-          <Button>
-            <Link color="inherit" to="/newbrew" className={classes.link}>
-              New Brew
+            <Button>
+              <Link color="inherit" to="/newbrew" className={classes.link}>
+                New Brew
             </Link>
-          </Button>
-          <Button>
-            <Link color="inherit" to="/profile" className={classes.link}>Profile</Link>
-          </Button>
+            </Button>
+            <Button>
+              <Link color="inherit" to="/profile" className={classes.link}>Profile</Link>
+            </Button></> : <></>}
         </Toolbar>
       </AppBar>
     </div>
