@@ -25,58 +25,60 @@ const Card = props => {
   return (
     <Grid item xs={12} sm={8} key={props.id}>
       <Paper className={classes.paper} variant="outlined" elevation={2}>
-        <Grid item xs={12}>
-          <Typography variant="h5">{props.title}</Typography>
+        <Grid container direction="row">
+          <Grid item>
+            <Typography variant="h5">{props.title}</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h5">
+              &nbsp;by {props.user ? props.user : "Anonymous User"}
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Typography variant="h5">
-            &nbsp;by {props.user ? props.user : "Anonymous User"}
-          </Typography>
-        </Grid>
+        <Grid container direction="row">
+          <Grid item>
+            <img
+              className={classes.image}
+              src={
+                props.picture !== ""
+                  ? props.picture
+                  : "./images/fermention-default.jpg"
+              }
+              style={{ width: "200px" }}
+              alt="User Brew"
+            />
+          </Grid>
+          <Grid item>
+            <Typography variant="body1">Ingredients:</Typography>
+            {props.ingredients.length > 0
+              ? props.ingredients.map(ingredient => (
+                <p key={ingredient.ingredient}>
+                  {ingredient.ingredient}&nbsp;{ingredient.amount}
+                  {ingredient.units}
+                </p>
+              ))
+              : "(None Listed)"}
 
-
-        <Grid item>
-          <img
-            className={classes.image}
-            src={
-              props.picture !== ""
-                ? props.picture
-                : "./images/fermention-default.jpg"
-            }
-            style={{ width: "200px" }}
-            alt="User Brew"
-          />
-        </Grid>
-        <Grid item>
-          <Typography variant="body1">Ingredients:</Typography>
-          {props.ingredients.length > 0
-            ? props.ingredients.map(ingredient => (
-              <p key={ingredient.ingredient}>
-                {ingredient.ingredient}&nbsp;{ingredient.amount}
-                {ingredient.units}
-              </p>
-            ))
-            : "(None Listed)"}
-
-          <Typography variant="body1">
-            Description:{" "}
-            {props.description ? props.description : "(Not Provided)"}
-          </Typography>
-        </Grid>
-
-        <Grid item>
-          <Typography variant="body1">
-            Total Brew Time: {props.brewLength}
-          </Typography>
+            <Typography variant="body1">
+              Description:{" "}
+              {props.description ? props.description : "(Not Provided)"}
+            </Typography>
+          </Grid>
         </Grid>
         <Grid container direction="row">
           <Grid item>
             <Typography variant="body1">
-              Brewing Status: <Timer endTime={props.endTime}></Timer>
+              Total Brew Time: {props.brewLength}
             </Typography>
           </Grid>
+          <Grid container direction="row">
+            <Grid item>
+              <Typography variant="body1">
+                Brewing Status: <Timer endTime={props.endTime}></Timer>
+              </Typography>
+            </Grid>
+          </Grid>
         </Grid>
-
       </Paper>
     </Grid>
   );
