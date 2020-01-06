@@ -5,7 +5,9 @@ module.exports = {
         db.Recipe
             .create(req.body)
             .then(dbRecipe => {
-                db.User.findOneAndUpdate({ username: dbRecipe.user }, { $push: { recipes: dbRecipe._id } }, { new: true })
+                console.log(dbRecipe)
+                db.User.findOneAndUpdate({ username: dbRecipe.user }, { $push: { recipes: dbRecipe._id } }, { new: true }, (result) => {
+                })
             })
             .then(dbUser => {
                 res.json(dbUser)

@@ -99,12 +99,21 @@ function SignUp(props) {
           username: username,
           password: password
         };
+<<<<<<< HEAD
         API.signup(data)
           .then(() => {
             Auth.logIn(username, password, response => {
               user.setUser(response);
               props.history.push("/");
             });
+=======
+        API.signup(data, response => {
+
+        }).then(
+          Auth.logIn(username, password, response => {
+            user.setUser(response);
+            props.history.push("/");
+>>>>>>> 5a826aab6be8f6cacb829be893aa7c3a89c9113d
           })
           .catch(err => {
             console.log(err.response.data.error);

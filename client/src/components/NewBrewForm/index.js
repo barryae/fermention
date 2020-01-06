@@ -8,10 +8,10 @@ import "./style.css";
 import UserContext from '../../context/UserContext';
 
 class NewBrewForm extends Component {
+    static contextType = UserContext;
 
     //Sets state
     state = {
-        user: "jim",
         title: "",
         category: "Other",
         description: "",
@@ -27,7 +27,9 @@ class NewBrewForm extends Component {
         units: "mL",
         loading: false
     }
-
+    componentDidMount = () => {
+        console.log(this.state.user)
+    }
     //Handles changes in input
     handleInputChange = event => {
         const { name, value, type } = event.target;
@@ -134,7 +136,7 @@ class NewBrewForm extends Component {
     handleSubmit = event => {
         event.preventDefault();
         const data = {
-            user: this.state.user,
+            user: this.context.user.username,
             title: this.state.title,
             category: this.state.category,
             ingredients: this.state.ingredients,
@@ -147,12 +149,12 @@ class NewBrewForm extends Component {
 
         //Only uploads to database if title exists
         if (this.state.title !== "") {
-            console.log(data)
+            // console.log(data)
 
             //Runs API function
             API.createRecipe(data)
                 .then(result => {
-                    console.log(result)
+                    // console.log(result)
                 })
                 .catch(err => console.log(err))
 
@@ -182,6 +184,7 @@ class NewBrewForm extends Component {
 
     //Renders form
     render() {
+        // console.log(this.context.user);
         return (
             <>
                 <Container maxWidth="sm">
