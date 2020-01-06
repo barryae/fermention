@@ -16,6 +16,28 @@ module.exports = {
                 res.status(422).json(err)
             })
     },
+    delete: function (req, res) {
+        db.Recipe
+            .deleteOne(req.body._id)
+            .then(result => {
+                console.log(result)
+            })
+            .catch(err => {
+                res.status(422).json(err)
+            })
+    },
+
+    findUserRecipes: function (req, res) {
+        db.User
+            .findById(req.body._id)
+            .then(user => {
+                res.json(user)
+            })
+            .catch(err => {
+                res.json({ message: err })
+            })
+    },
+
     findAll: function (req, res) {
         db.Recipe
             .find(req.query)

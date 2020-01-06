@@ -53,7 +53,7 @@ function LogIn(props) {
             Auth.logIn(username, password, (response) => {
                 user.setUser(response);
                 props.history.push("/");
-            }).catch(err => { console.log(err) });
+            });
         }
     }
 
