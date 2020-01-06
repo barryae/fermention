@@ -18,6 +18,10 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     marginRight: 15
+  },
+
+  link: {
+    color: 'white'
   }
 }));
 
@@ -36,17 +40,17 @@ const NavBar = () => {
             Fermention
           </Typography>
           <Button>
-            <Link color="inherit" href="/home">
+            <Link color="inherit" href="/home" className={classes.link}>
               Home
             </Link>
           </Button>
           <Button>
-            <Link color="inherit" href="/newbrew">
+            <Link color="inherit" href="/newbrew" className={classes.link}>
               New Brew
             </Link>
           </Button>
           <Button>
-            <Link color="inherit" href="/login">Log In</Link>
+            <Link color="inherit" href="/profile" className={classes.link}>Profile</Link>
           </Button>
         </Toolbar>
       </AppBar>
