@@ -56,11 +56,13 @@ function SignUp(props) {
     confirmPassword: ""
   });
 
-  const [formErrors, setFormErrors] = useState({
+  const defaultFormErrors = {
     username: "",
     password: "",
-    confirmPassword: ""
-  });
+    confirmPassword: "",
+    duplicate: ""
+  };
+  const [formErrors, setFormErrors] = useState(defaultFormErrors);
 
   const changeHandler = e => {
     const { name, value } = e.target;
@@ -82,8 +84,6 @@ function SignUp(props) {
         newFormErrors.confirmPassword =
           formValues.password !== value ? "Must match Password" : "";
         break;
-      default:
-        break;
     }
     setFormErrors(newFormErrors);
   };
@@ -99,22 +99,25 @@ function SignUp(props) {
           username: username,
           password: password
         };
-        API.signup(data, response => {
-          console.log(response);
-        }).then(
-          Auth.logIn(username, password, response => {
-            user.setUser(response);
-            props.history.push("/");
+        API.signup(data)
+          .then(() => {
+            Auth.logIn(username, password, response => {
+              user.setUser(response);
+              props.history.push("/");
+            });
           })
-        );
+          .catch(err => {
+            console.log(err.response.data.error);
+            setFormErrors({
+              ...defaultFormErrors,
+              duplicate: "Username is taken. Please try again."
+            });
+          });
       }
     }
   };
 
   const classes = useStyles();
-
-  console.log(formErrors);
-  console.log(formValues);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -145,6 +148,9 @@ function SignUp(props) {
               />
               {formErrors.username.length > 0 && (
                 <span className={classes.errors}>{formErrors.username}</span>
+              )}
+              {formErrors.duplicate.length > 0 && (
+                <span className={classes.errors}>{formErrors.duplicate}</span>
               )}
               <TextField
                 variant="outlined"
