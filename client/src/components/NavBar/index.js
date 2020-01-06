@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
     color: 'white',
     [theme.breakpoints.down('sm')]: {
       fontSize: ".75rem",
-    }
+    },
+    textDecoration: "none"
   }
 }));
 

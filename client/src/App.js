@@ -17,8 +17,7 @@ import { ThemeProvider } from '@material-ui/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-
-      main: 'red',
+      main: '#55370f',
     },
 
   },
@@ -36,7 +35,6 @@ class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem("token")
     if (token) {
-      console.log(token)
       API.getUser()
         .then(response => {
           console.log(response)
@@ -51,7 +49,7 @@ class App extends Component {
     const setUser = this.setUser
     return (
       <>
-        <ThemeProvider>
+        <ThemeProvider theme={theme}>
           <Container>
             <Router>
               <UserContext.Provider
