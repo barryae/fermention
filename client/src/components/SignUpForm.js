@@ -13,7 +13,6 @@ import { withRouter } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import API from "../utils/API";
 import Auth from "../utils/Auth";
-import { de } from "date-fns/locale";
 
 const useStyles = makeStyles(theme => ({
   paper: {

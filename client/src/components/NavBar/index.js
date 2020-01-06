@@ -4,7 +4,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-// import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 
@@ -15,14 +14,20 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    margin: 10
+    margin: 10,
+    [theme.breakpoints.down('sm')]: {
+      display: "none",
+    }
   },
   avatar: {
     marginRight: 15
   },
 
   link: {
-    color: 'white'
+    color: 'white',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: ".75rem",
+    }
   }
 }));
 
@@ -41,29 +46,17 @@ const NavBar = () => {
             Fermention
           </Typography>
           <Button>
-<<<<<<< HEAD
-            <Link color="inherit" href="/home" className={classes.link}>
-=======
-            <Link color="inherit" to="/home">
->>>>>>> 5a826aab6be8f6cacb829be893aa7c3a89c9113d
+            <Link color="inherit" to="/home" className={classes.link}>
               Home
             </Link>
           </Button>
           <Button>
-<<<<<<< HEAD
-            <Link color="inherit" href="/newbrew" className={classes.link}>
-=======
-            <Link color="inherit" to="/newbrew">
->>>>>>> 5a826aab6be8f6cacb829be893aa7c3a89c9113d
+            <Link color="inherit" to="/newbrew" className={classes.link}>
               New Brew
             </Link>
           </Button>
           <Button>
-<<<<<<< HEAD
-            <Link color="inherit" href="/profile" className={classes.link}>Profile</Link>
-=======
-            <Link color="inherit" to="/login">Log In</Link>
->>>>>>> 5a826aab6be8f6cacb829be893aa7c3a89c9113d
+            <Link color="inherit" to="/profile" className={classes.link}>Profile</Link>
           </Button>
         </Toolbar>
       </AppBar>

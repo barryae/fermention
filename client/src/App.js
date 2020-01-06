@@ -7,9 +7,22 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NavBar from "./components/NavBar";
 import { Container } from "@material-ui/core";
-import UserContext from "./context/UserContext"
-import ProtectedRoute from "./components/ProtectedRoute"
-import API from "./utils/API"
+import UserContext from "./context/UserContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import API from "./utils/API";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+
+      main: 'red',
+    },
+
+  },
+});
 
 class App extends Component {
   state = {
@@ -38,23 +51,25 @@ class App extends Component {
     const setUser = this.setUser
     return (
       <>
-        <Container>
-          <Router>
-            <UserContext.Provider
-              value={{
-                user: user,
-                setUser: setUser
-              }}
-            >
-              <NavBar />
-              <ProtectedRoute exact path="/" component={Home} />
-              <ProtectedRoute exact path="/home" component={Home} />
-              <ProtectedRoute exact path="/newbrew" component={NewBrew} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={SignUp} />
-            </UserContext.Provider>
-          </Router>
-        </Container>
+        <ThemeProvider>
+          <Container>
+            <Router>
+              <UserContext.Provider
+                value={{
+                  user: user,
+                  setUser: setUser
+                }}
+              >
+                <NavBar />
+                <ProtectedRoute exact path="/" component={Home} />
+                <ProtectedRoute exact path="/home" component={Home} />
+                <ProtectedRoute exact path="/newbrew" component={NewBrew} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={SignUp} />
+              </UserContext.Provider>
+            </Router>
+          </Container>
+        </ThemeProvider>
       </>
     );
   }

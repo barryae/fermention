@@ -27,9 +27,7 @@ class NewBrewForm extends Component {
         units: "mL",
         loading: false
     }
-    componentDidMount = () => {
-        console.log(this.state.user)
-    }
+
     //Handles changes in input
     handleInputChange = event => {
         const { name, value, type } = event.target;
