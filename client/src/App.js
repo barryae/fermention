@@ -39,7 +39,6 @@ class App extends Component {
     if (token) {
       API.getUser()
         .then(response => {
-          console.log(response)
           this.setUser(response.data)
         })
     }

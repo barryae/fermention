@@ -14,7 +14,6 @@ module.exports = {
     check: function (req, res) {
         const { username, password } = req.body;
         db.User.findOne({ username: username }).then(function (dbUser) {
-            console.log(dbUser);
             if (!dbUser)
                 return res
                     .status(401)

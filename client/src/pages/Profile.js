@@ -17,11 +17,9 @@ class Profile extends Component {
     componentDidMount() {
         const token = localStorage.getItem("token")
         if (token) {
-            console.log(token)
             API.getUser()
                 .then(response => {
                     this.setUser(response.data)
-                    console.log(this.state.user)
                     this.loadRecipes()
                 })
         }
@@ -95,7 +93,6 @@ class Profile extends Component {
                     database: res.data,
                     recipes: res.data
                 })
-                console.log(this.state.recipes)
             })
     }
 
