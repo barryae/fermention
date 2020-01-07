@@ -3,6 +3,7 @@ import API from "../utils/API";
 import Card from "../components/Card";
 import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText } from '@material-ui/core';
 import UserContext from "../context/UserContext"
+import ProfileBio from "../components/ProfileBio/index"
 
 class Profile extends Component {
     state = {
@@ -99,6 +100,11 @@ class Profile extends Component {
     render() {
         return (
             <Grid container justify="center" spacing={6}>
+
+                <Grid container item justify="center" xs={12} sm={8}>
+                    <ProfileBio user={this.state.user.username}/>
+                </Grid>
+
                 <Grid item xs={12} sm={8} >
                     <FormControl
                         fullWidth={true}>
