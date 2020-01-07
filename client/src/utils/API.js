@@ -18,7 +18,7 @@ export default {
     return axios.post("/api/recipes", recipe);
   },
   deleteRecipe: function() {
-    axios.delete("/api/recipes/").then(res => console.log(res));
+    axios.delete("/api/recipes/");
   },
   getUserRecipes: function(id) {
     return axios.get("/api/recipes/" + id);

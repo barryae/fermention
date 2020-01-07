@@ -20,7 +20,6 @@ module.exports = {
       });
   },
   delete: function(req, res) {
-    console.log("hit");
     db.Recipe.deleteOne(req.body._id)
       .then(result => {
         console.log(result);
