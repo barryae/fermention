@@ -67,8 +67,8 @@ class Profile extends Component {
         const searchTerm = this.state.search;
         if (recipe.ingredients.length !== 0) {
             for (let i = 0; i < recipe.ingredients.length; i++) {
-                if (recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()) {
-                    return recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()
+                if (recipe.ingredients[i].ingredient.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return recipe.ingredients[i].ingredient.toLowerCase().includes(searchTerm.toLowerCase());
                 }
             }
             return false;
