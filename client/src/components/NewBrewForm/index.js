@@ -27,9 +27,7 @@ class NewBrewForm extends Component {
         units: "mL",
         loading: false
     }
-    componentDidMount = () => {
-        console.log(this.state.user)
-    }
+
     //Handles changes in input
     handleInputChange = event => {
         const { name, value, type } = event.target;
@@ -70,13 +68,7 @@ class NewBrewForm extends Component {
 
     //Formats brew length
     calcBrewLength = (days, hours, mins) => {
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-        if (mins < 10) {
-            mins = "0" + mins;
-        }
-        let brewLength = `${days}:${hours}:${mins}:00`
+        let brewLength = `${days} days ${hours} hours ${mins} minutes 00 seconds`
         return brewLength;
     }
 

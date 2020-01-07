@@ -29,14 +29,14 @@ class Timer extends Component {
             let days = Math.floor(msecs / (24 * 60 * 60 * 1000));
             msecs = msecs % (24 * 60 * 60 * 1000);
             let hours = Math.floor(msecs / (60 * 60 * 1000));
-            if (hours < 10) { hours = "0" + hours };
+
             msecs = msecs % (60 * 60 * 1000);
             let mins = Math.floor(msecs / (60 * 1000));
-            if (mins < 10) { mins = "0" + mins };
+
             msecs = msecs % (60 * 1000);
             let secs = Math.floor(msecs / 1000);
-            if (secs < 10) { secs = "0" + secs };
-            let timerStr = `${days}:${hours}:${mins}:${secs}`;
+
+            let timerStr = `${days} days ${hours} hours ${mins} minutes ${secs} seconds`;
             return timerStr;
         }
     }
