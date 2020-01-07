@@ -3,7 +3,9 @@ import NewBrewForm from "../components/NewBrewForm";
 
 function NewBrew() {
     return (
+
         <NewBrewForm />
+
     );
 }
 

@@ -36,7 +36,7 @@ class Timer extends Component {
             msecs = msecs % (60 * 1000);
             let secs = Math.floor(msecs / 1000);
             if (secs < 10) { secs = "0" + secs };
-            let timerStr = `${days}:${hours}:${mins}:${secs}`;
+            let timerStr = `${days} days ${hours} hours ${mins} minutes ${secs} seconds`;
             return timerStr;
         }
     }

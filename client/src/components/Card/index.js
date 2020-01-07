@@ -52,11 +52,11 @@ const Card = props => {
             <Typography variant="body1">Ingredients:</Typography>
             {props.ingredients.length > 0
               ? props.ingredients.map(ingredient => (
-                  <p key={ingredient.ingredient}>
-                    {ingredient.ingredient}&nbsp;{ingredient.amount}
-                    {ingredient.units}
-                  </p>
-                ))
+                <p key={ingredient.ingredient}>
+                  {ingredient.ingredient}&nbsp;{ingredient.amount}
+                  {ingredient.units}
+                </p>
+              ))
               : "(None Listed)"}
 
             <Typography variant="body1">
