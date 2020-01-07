@@ -47,6 +47,12 @@ const Card = props => {
           </Grid>
 
           <Grid item xs={12} sm={6}>
+
+            <Typography variant="body1">
+              <b>Category:&nbsp;</b>
+              {props.category}
+            </Typography>
+
             <Typography variant="body1"><b>Ingredients:</b> </Typography>
             <ul>{props.ingredients.length > 0
               ? props.ingredients.map(ingredient => (

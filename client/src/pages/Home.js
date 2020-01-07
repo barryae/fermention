@@ -141,6 +141,7 @@ class Home extends Component {
 
                                 <Card key={recipe._id}
                                     id={recipe._id}
+                                    category={recipe.category}
                                     title={recipe.title}
                                     description={recipe.description}
                                     user={recipe.user}
