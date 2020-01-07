@@ -19,11 +19,8 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 //Mongo DB
-<<<<<<< HEAD
-mongoose.connect(process.env.MONGODB_URI || "mongodb://user:password1@ds359868.mlab.com:59868/heroku_sxtqqw6c");
-=======
 mongoose.connect(process.env.MONGODB_URI)
->>>>>>> e8f7e9fd2ed0fb35c0d9a57b5d498de55e9c0855
+//mongoose.connect("mongodb://localhost/fermention", { useNewUrlParser: true })
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);

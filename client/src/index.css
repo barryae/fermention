@@ -9,3 +9,9 @@ body {
   cursor: pointer;
   text-decoration: underline;
 }
+
+#clearUser{
+  float: right;
+  color: red;
+  cursor: pointer;
+}

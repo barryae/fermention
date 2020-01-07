@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import Card from "../components/Card";
-import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText, Typography } from '@material-ui/core';
+import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText, Typography, Paper } from '@material-ui/core';
 
 
 
@@ -146,7 +146,7 @@ class Home extends Component {
                         </FormControl>
                     </Grid>
                 </Grid>
-                {(this.state.user) ? <Grid item xs={12}><Typography variant="h3">{this.state.user}</Typography></Grid> : <></>}
+                {(this.state.user) ? <Grid item xs={12} sm={8}><Paper><Typography variant="h3" style={{ padding: ".5em" }}>{this.state.user}'s Brews<span id="clearUser" onClick={() => this.setUser("")}>&times;</span></Typography> </Paper></Grid> : <></>}
                 <Grid container item justify="center" xs={12} sm={8}>
                     {this.state.recipes.length > 0 ? (
                         <>
