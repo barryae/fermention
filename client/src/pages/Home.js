@@ -98,8 +98,8 @@ class Home extends Component {
                     </FormControl>
                 </Grid>
 
-                <Grid container justify="center" spacing={6}>
-                    <Grid item xs={12} sm={4} >
+                <Grid container item justify="center" spacing={6} xs={12} sm={8} >
+                    <Grid item xs={12} sm={6} >
                         <FormControl
                             fullWidth={true}>
                             <NativeSelect value={this.state.category} name="category" onChange={this.handleInputChange}>
@@ -118,7 +118,7 @@ class Home extends Component {
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={12} sm={4} >
+                    <Grid item xs={12} sm={6} >
                         <FormControl
                             fullWidth={true}>
                             <NativeSelect value={this.state.status} name="brewStatus" onChange={this.handleInputChange}>
@@ -132,7 +132,7 @@ class Home extends Component {
                     </Grid>
                 </Grid>
 
-                <Grid container justify="center" className="recipes">
+                <Grid container item justify="center" xs={12} sm={8}>
                     {this.state.recipes.length > 0 ? (
                         <>
                             {this.state.recipes.map(recipe => (
