@@ -68,12 +68,6 @@ class NewBrewForm extends Component {
 
     //Formats brew length
     calcBrewLength = (days, hours, mins) => {
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-        if (mins < 10) {
-            mins = "0" + mins;
-        }
         let brewLength = `${days} days ${hours} hours ${mins} minutes 00 seconds`
         return brewLength;
     }
