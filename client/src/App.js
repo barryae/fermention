@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
+import Profile from "./pages/Profile"
 import NewBrew from "./pages/NewBrew";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NavBar from "./components/NavBar";
 import { Container } from "@material-ui/core";
@@ -50,7 +50,7 @@ class App extends Component {
               <ProtectedRoute exact path="/" component={Home} />
               <ProtectedRoute exact path="/home" component={Home} />
               <ProtectedRoute exact path="/newbrew" component={NewBrew} />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/profile" component={Profile} />
               <Route exact path="/signup" component={SignUp} />
             </UserContext.Provider>
           </Router>

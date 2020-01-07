@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import API from "../utils/API"
 import Card from "../components/Card"
 import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText } from '@material-ui/core';
-
+import UserContext from "../context/UserContext"
 
 class Profile extends Component {
     state = {
+        user: "",
         database: [],
         recipes: [],
         category: "All",
@@ -14,7 +15,20 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        this.loadRecipes();
+        const token = localStorage.getItem("token")
+        if (token) {
+            console.log(token)
+            API.getUser()
+                .then(response => {
+                    this.setUser(response.data)
+                    console.log(this.state.user)
+                    this.loadRecipes()
+                })
+        }
+    }
+
+    setUser = user => {
+        this.setState({ user: user })
     }
 
     filterFeed() {
@@ -74,16 +88,15 @@ class Profile extends Component {
         });
     };
 
-    // bring in user from context to load user specific recipes
     loadRecipes = () => {
-        API.getUserRecipes(user)
-            .then(res =>
-                //this 
-
+        API.getUserRecipes(this.state.user.username)
+            .then(res => {
                 this.setState({
                     database: res.data,
                     recipes: res.data
-                }))
+                })
+                console.log(this.state.recipes)
+            })
     }
 
     render() {
@@ -154,5 +167,7 @@ class Profile extends Component {
         )
     };
 }
+
+Profile.contextType = UserContext
 
 export default Profile;

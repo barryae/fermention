@@ -28,8 +28,9 @@ module.exports = {
     },
 
     findUserRecipes: function (req, res) {
-        db.User
-            .findById(req.body._id)
+        console.log(req.params.user)
+        db.Recipe
+            .find({ user: req.params.user })
             .then(user => {
                 res.json(user)
             })
@@ -41,7 +42,7 @@ module.exports = {
     findAll: function (req, res) {
         db.Recipe
             .find(req.query)
-            .sort({ brewStart: -1 })
+            .sort({ startTime: -1 })
             .then(dbRecipes => {
                 res.json(dbRecipes)
             })
