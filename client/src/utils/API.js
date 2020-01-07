@@ -22,12 +22,12 @@ export default {
         return axios.post("/api/recipes", recipe);
     },
 
-    deleteRecipe: function (recipe) {
-        return axios.delete("/api/recipes", recipe)
+    deleteRecipe: function (id) {
+        return axios.delete("/api/recipes" + id)
     },
 
     getUserRecipes: function (user) {
-        return axios.get("/api/recipes/user", user)
+        return axios.get("/api/recipes/" + user)
     },
 
     getAllRecipes: function () {

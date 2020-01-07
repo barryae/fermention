@@ -5,7 +5,6 @@ module.exports = {
         db.Recipe
             .create(req.body)
             .then(dbRecipe => {
-                console.log(dbRecipe)
                 db.User.findOneAndUpdate({ username: dbRecipe.user }, { $push: { recipes: dbRecipe._id } }, { new: true }, (result) => {
                 })
             })
@@ -20,7 +19,6 @@ module.exports = {
         db.Recipe
             .deleteOne(req.body._id)
             .then(result => {
-                console.log(result)
             })
             .catch(err => {
                 res.status(422).json(err)
@@ -28,8 +26,8 @@ module.exports = {
     },
 
     findUserRecipes: function (req, res) {
-        db.User
-            .findById(req.body._id)
+        db.Recipe
+            .find({ user: req.params.user })
             .then(user => {
                 res.json(user)
             })
@@ -41,7 +39,7 @@ module.exports = {
     findAll: function (req, res) {
         db.Recipe
             .find(req.query)
-            .sort({ brewStart: -1 })
+            .sort({ startTime: -1 })
             .then(dbRecipes => {
                 res.json(dbRecipes)
             })
