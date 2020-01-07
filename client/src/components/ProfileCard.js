@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Paper } from "@material-ui/core";
-import Timer from "../Timer";
+import Timer from "./Timer";
+import CloseButton from "./CloseButton";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Card = props => {
+const ProfileCard = props => {
   const classes = useStyles();
 
   return (
@@ -31,6 +32,7 @@ const Card = props => {
             <Typography variant="h5">
               {props.title} by {props.user ? props.user : "Anonymous User"}{" "}
             </Typography>
+            <CloseButton />
           </Grid>
           <Grid item xs={12} sm={6}>
             <img
@@ -90,4 +92,4 @@ const Card = props => {
   );
 };
 
-export default Card;
+export default ProfileCard;
