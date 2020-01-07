@@ -4,9 +4,11 @@ const recipeController = require("../../controllers/recipeController");
 router.route("/")
     .post(recipeController.create)
     .get(recipeController.findAll)
-    .delete(recipeController.delete)
+    .delete(recipeController.delete);
 
-router.route("/user")
+
+router
+    .route("/:user")
     .get(recipeController.findUserRecipes)
 
 module.exports = router;
