@@ -24,13 +24,14 @@ const useStyles = makeStyles(theme => ({
 const Card = props => {
   const classes = useStyles();
 
+
   return (
     <Grid container item xs={12} key={props.id} spacing={2}>
       <Paper className={classes.paper} variant="outlined" elevation={2}>
 
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h5">{props.title} by {props.user ? props.user : "Anonymous User"} </Typography>
+            <Typography variant="h5">{props.title} by <span onClick={() => props.setUser(props.user)} id="username">{props.user ? props.user : "Anonymous User"}</span> </Typography>
           </Grid>
 
           <Grid item xs={12} sm={6}>

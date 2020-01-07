@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import Card from "../components/Card";
-import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText } from '@material-ui/core';
+import { Grid, InputLabel, NativeSelect, FormControl, Input, FormHelperText, Typography, Paper } from '@material-ui/core';
 
 
 
@@ -11,14 +11,19 @@ class Home extends Component {
         recipes: [],
         category: "All",
         search: "",
-        brewStatus: "All"
+        brewStatus: "All",
+        user: ""
     }
 
     componentDidMount() {
         this.loadRecipes();
     }
 
-    filterFeed() {
+    setUser = (user) => {
+        this.setState({ user: user }, this.filterFeed)
+    }
+
+    filterFeed = () => {
         const filteredrecipes = this.state.database.filter(recipe => {
             let isMatch = true;
             if (this.state.category !== "All") {
@@ -32,6 +37,11 @@ class Home extends Component {
             if (this.state.brewStatus !== "All") {
                 isMatch = isMatch && this.statusFilter(recipe);
             }
+
+            if (this.state.user) {
+                isMatch = isMatch && this.userFilter(recipe);
+            }
+
             return isMatch;
         });
         this.setState({ recipes: filteredrecipes });
@@ -40,6 +50,11 @@ class Home extends Component {
     //Filters by chosen category
     categoryFilter(recipe) {
         return recipe.category === this.state.category;
+    }
+
+    //sets user
+    userFilter(recipe) {
+        return recipe.user === this.state.user;
     }
 
     //Filters by brew status
@@ -56,8 +71,8 @@ class Home extends Component {
         const searchTerm = this.state.search;
         if (recipe.ingredients.length !== 0) {
             for (let i = 0; i < recipe.ingredients.length; i++) {
-                if (recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()) {
-                    return recipe.ingredients[i].ingredient.toLowerCase() === searchTerm.toLowerCase()
+                if (recipe.ingredients[i].ingredient.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return recipe.ingredients[i].ingredient.toLowerCase().includes(searchTerm.toLowerCase());
                 }
             }
             return false;
@@ -131,7 +146,7 @@ class Home extends Component {
                         </FormControl>
                     </Grid>
                 </Grid>
-
+                {(this.state.user) ? <Grid item xs={12} sm={8}><Paper><Typography variant="h3" style={{ padding: ".5em" }}>{this.state.user}'s Brews<span id="clearUser" onClick={() => this.setUser("")}>&times;</span></Typography> </Paper></Grid> : <></>}
                 <Grid container item justify="center" xs={12} sm={8}>
                     {this.state.recipes.length > 0 ? (
                         <>
@@ -148,7 +163,8 @@ class Home extends Component {
                                     picture={recipe.picture}
                                     ingredients={recipe.ingredients}
                                     endTime={recipe.endTime}
-                                    brewLength={recipe.brewLength}> </Card>
+                                    brewLength={recipe.brewLength}
+                                    setUser={this.setUser} ></Card>
 
 
 

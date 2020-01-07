@@ -19,9 +19,8 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 //Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fermention", { useNewUrlParser: true })
-
-// mongoose.connect("mongodb://localhost/fermention", { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI)
+//mongoose.connect("mongodb://localhost/fermention", { useNewUrlParser: true })
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
