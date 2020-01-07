@@ -22,17 +22,19 @@ class Profile extends Component {
   };
 
   componentDidMount() {
+    console.log(this.state.user);
     const token = localStorage.getItem("token");
     if (token) {
       API.getUser().then(response => {
-        this.setUser(response.data);
-        this.loadRecipes();
+        console.log(response);
+        this.setUser(response.data._id);
       });
     }
   }
 
-  setUser = user => {
-    this.setState({ user: user });
+  setUser = id => {
+    console.log(id);
+    this.setState({ user: id }, this.loadRecipes);
   };
 
   filterFeed() {
@@ -102,10 +104,12 @@ class Profile extends Component {
   };
 
   loadRecipes = () => {
-    API.getUserRecipes(this.state.user.username).then(res => {
+    console.log("this.state.user in loadRecipes", this.state);
+    API.getUserRecipes(this.state.user).then(res => {
+      console.log("res.data in loadRecipes", res.data.recipes);
       this.setState({
-        database: res.data,
-        recipes: res.data
+        database: res.data.recipes,
+        recipes: res.data.recipes
       });
     });
   };
@@ -168,6 +172,7 @@ class Profile extends Component {
             <>
               {this.state.recipes.map(recipe => (
                 <ProfileCard
+                  loadRecipes={this.loadRecipes}
                   key={recipe._id}
                   id={recipe._id}
                   category={recipe.category}
@@ -178,9 +183,7 @@ class Profile extends Component {
                   ingredients={recipe.ingredients}
                   endTime={recipe.endTime}
                   brewLength={recipe.brewLength}
-                >
-                  {" "}
-                </ProfileCard>
+                ></ProfileCard>
               ))}
             </>
           ) : (

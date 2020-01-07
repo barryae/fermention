@@ -7,8 +7,10 @@ export default function CloseButton(props) {
   const handleDelete = e => {
     e.preventDefault();
     console.log("I deleted");
-    API.deleteRecipe(props._id, response => {
-      response.json("Delete Complete");
+    console.log("props", props);
+    API.deleteRecipe(props.id).then(response => {
+      console.log("Delete Complete");
+      props.loadRecipes();
     });
   };
 

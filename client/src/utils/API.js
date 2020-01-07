@@ -17,10 +17,12 @@ export default {
   createRecipe: function(recipe) {
     return axios.post("/api/recipes", recipe);
   },
-  deleteRecipe: function() {
-    axios.delete("/api/recipes/");
+  deleteRecipe: function(id) {
+    console.log("id in API deleteRecipe", id);
+    return axios.delete("/api/recipes/" + id);
   },
   getUserRecipes: function(id) {
+    console.log("id in API", id);
     return axios.get("/api/recipes/" + id);
   },
   getAllRecipes: function() {

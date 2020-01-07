@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const recipeController = require("../../controllers/recipeController");
 
-router.route("/")
-    .post(recipeController.create)
-    .get(recipeController.findAll)
-    .delete(recipeController.delete);
-
+router
+  .route("/")
+  .post(recipeController.create)
+  .get(recipeController.findAll);
 
 router
-    .route("/:user")
-    .get(recipeController.findUserRecipes)
+  .route("/:id")
+  .get(recipeController.findUserRecipes)
+  .delete(recipeController.delete);
 
 module.exports = router;

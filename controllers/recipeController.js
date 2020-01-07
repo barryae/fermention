@@ -20,9 +20,11 @@ module.exports = {
       });
   },
   delete: function(req, res) {
-    db.Recipe.deleteOne(req.body._id)
+    console.log("req.params.id", req.params.id);
+    db.Recipe.deleteOne({ _id: req.params.id })
       .then(result => {
         console.log(result);
+        res.json(result);
       })
       .catch(err => {
         console.log(err);
@@ -31,8 +33,11 @@ module.exports = {
   },
 
   findUserRecipes: function(req, res) {
-    db.User.findById(req.body._id)
+    console.log("req.params", req.params);
+    db.User.findById(req.params.id)
+      .populate("recipes")
       .then(user => {
+        console.log(user);
         res.json(user);
       })
       .catch(err => {
@@ -41,6 +46,7 @@ module.exports = {
   },
 
   findAll: function(req, res) {
+    console.log("findAll");
     db.Recipe.find(req.query)
       .sort({ brewStart: -1 })
       .then(dbRecipes => {

@@ -32,7 +32,7 @@ const ProfileCard = props => {
             <Typography variant="h5">
               {props.title} by {props.user ? props.user : "Anonymous User"}{" "}
             </Typography>
-            <CloseButton />
+            <CloseButton id={props.id} loadRecipes={props.loadRecipes} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <img

@@ -1,6 +1,6 @@
 const express = require("express");
-const mongoose = require("mongoose")
-const routes = require("./routes")
+const mongoose = require("mongoose");
+const routes = require("./routes");
 require("dotenv").config();
 
 const app = express();
@@ -19,7 +19,8 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 //Mongo DB
-mongoose.connect(process.env.MONGODB_URI)
+console.log(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI);
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
