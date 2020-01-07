@@ -4,3 +4,8 @@ body {
   font-family: sans-serif;
   background-image: url("./images/bricks.jpg");
 }
+
+#username:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
