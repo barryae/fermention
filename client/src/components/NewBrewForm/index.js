@@ -360,7 +360,7 @@ class NewBrewForm extends Component {
                             )}
 
                     </FormControl>
-                    {(this.state.message) ? <p style={{ border: '2px solid black', padding: '1em', backgroundColor: 'white', textAlign: 'center', margin: '0 auto' }}><b>{this.state.message}</b></p> : <></>}
+                    {(this.state.message) ? <p style={{ borderRadius: '4px', padding: '1em', backgroundColor: 'white', textAlign: 'center', margin: '0 auto' }}><b>{this.state.message}</b></p> : <></>}
                     <div id="wrapper">
                         <Button
                             size="large"

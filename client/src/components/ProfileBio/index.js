@@ -31,7 +31,7 @@ const ProfileBio = props => {
   let history = useHistory();
   return (
 
-    <Paper className={classes.paper} variant="outlined" elevation={2}>
+    <Paper className={classes.paper} variant="outlined" elevation={2} style={{ width: '100%' }}>
 
       <Typography variant="h5">{props.user ? props.user : "Anonymous User"}'s Brews</Typography>
       <Button color="secondary" variant="contained" className={classes.logOutBtn}>
