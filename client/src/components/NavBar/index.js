@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import Avatar from "@material-ui/core/Avatar";
 
 
 const useStyles = makeStyles(theme => ({
@@ -15,14 +14,15 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    margin: 10,
+    margin: 5,
     [theme.breakpoints.down('xs')]: {
       display: "none",
     },
-    float: 'left'
+    float: 'left',
+    font: "bold 40px Times New Roman, Times, serif"
   },
   avatar: {
-    margin: 10,
+    margin: 5,
     float: 'left'
   },
 
@@ -48,10 +48,11 @@ const NavBar = (props) => {
     <AppBar position="static">
       <Toolbar className={classes.appitems}>
         {props.loggedIn ? <>
-          <Avatar
-            variant="square"
+          <img
             src="../logo192.png"
+            alt="logo"
             className={classes.avatar}
+            style={{ height: "40px" }}
           />
           <Typography variant="h4" className={classes.title}>
             Fermention
@@ -70,10 +71,11 @@ const NavBar = (props) => {
           </Button></>
           :
           <div style={{ margin: '0 auto' }}>
-            <Avatar
-              variant="square"
+            <img
               src="../logo192.png"
+              alt="logo"
               className={classes.avatar}
+              style={{ width: "50px" }}
             />
             <Typography variant="h4" className={classes.title}>
               Fermention

@@ -4,7 +4,6 @@ module.exports = {
     create: function (req, res) {
         db.Recipe.create(req.body)
             .then(dbRecipe => {
-                console.log(dbRecipe.user);
                 return db.User.findOneAndUpdate(
                     { username: dbRecipe.user },
                     { $push: { recipes: dbRecipe._id } },
@@ -12,7 +11,6 @@ module.exports = {
                 );
             })
             .then(dbUser => {
-                console.log(dbUser.toObject());
                 res.json(dbUser);
             })
             .catch(err => {
