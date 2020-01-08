@@ -53,6 +53,7 @@ class App extends Component {
     const { user } = this.state;
     const setUser = this.setUser;
     let loggedIn = Auth.isLoggedIn();
+
     return (
       <>
         <ThemeProvider theme={theme}>

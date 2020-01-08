@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Paper, Link, Button } from "@material-ui/core";
-import Auth from "../../utils/Auth"
-import { useHistory } from 'react-router-dom'
+import Auth from "../../utils/Auth";
+import UserContext from "../../context/UserContext";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,17 +28,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProfileBio = props => {
+  const { setUser } = useContext(UserContext);
   const classes = useStyles();
   let history = useHistory();
   return (
 
     <Paper className={classes.paper} variant="outlined" elevation={2} style={{ width: '100%' }}>
 
-      <Typography variant="h5">{props.user ? props.user : "Anonymous User"}'s Brews</Typography>
+      <Typography variant="h5">{props.user ? props.user : "User"}'s Brews</Typography>
       <Button color="secondary" variant="contained" className={classes.logOutBtn}>
         <Link color="inherit" onClick={() => {
           Auth
-            .logOut(() => { history.push('/') })
+            .logOut(() => {
+              setUser(null);
+              history.push('/');
+            })
         }}
           to='/'
           className={classes.link}>Logout</Link>
