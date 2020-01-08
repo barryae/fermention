@@ -24,11 +24,11 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    console.log(this.state.user);
+    //console.log(this.state.user);
     const token = localStorage.getItem("token");
     if (token) {
       API.getUser().then(response => {
-        console.log(response);
+        //console.log(response);
         this.setUser(response.data._id);
         this.setState({ username: response.data.username });
       });
@@ -36,7 +36,7 @@ class Profile extends Component {
   }
 
   setUser = id => {
-    console.log(id);
+    //console.log(id);
     this.setState({ user: id }, this.loadRecipes);
   };
 
@@ -107,9 +107,9 @@ class Profile extends Component {
   };
 
   loadRecipes = () => {
-    console.log("this.state.user in loadRecipes", this.state);
+    //console.log("this.state.user in loadRecipes", this.state);
     API.getUserRecipes(this.state.user).then(res => {
-      console.log("res.data in loadRecipes", res.data.recipes);
+      //console.log("res.data in loadRecipes", res.data.recipes);
       this.setState({
         database: res.data.recipes,
         recipes: res.data.recipes
@@ -193,10 +193,10 @@ class Profile extends Component {
               ))}
             </>
           ) : (
-            <Grid item xs={12} sm={8}>
-              <h3>No Results to Display</h3>
-            </Grid>
-          )}
+              <Grid item xs={12} sm={8}>
+                <h3>No Results to Display</h3>
+              </Grid>
+            )}
         </Grid>
       </Grid>
     );

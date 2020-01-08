@@ -146,7 +146,7 @@ class Home extends Component {
                         </FormControl>
                     </Grid>
                 </Grid>
-                {(this.state.user) ? <Grid item xs={12} sm={8}><Paper><Typography variant="h3" style={{ padding: ".5em" }}>{this.state.user}'s Brews<span id="clearUser" onClick={() => this.setUser("")}>&times;</span></Typography> </Paper></Grid> : <></>}
+                {(this.state.user) ? <Grid item xs={12} sm={8}><Paper variant="outlined" elevation={2} style={{ padding: '1em' }}><Typography variant="h5" style={{ padding: ".5em" }}>{this.state.user}'s Brews<span id="clearUser" onClick={() => this.setUser("")}>&times;</span></Typography> </Paper></Grid> : <></>}
                 <Grid container item justify="center" xs={12} sm={8}>
                     {this.state.recipes.length > 0 ? (
                         <>
