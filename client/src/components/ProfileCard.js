@@ -28,7 +28,7 @@ const ProfileCard = props => {
     <Grid container item xs={12} key={props.id} spacing={2}>
       <Paper className={classes.paper} variant="outlined" elevation={2}>
         <Grid container item xs={12} spacing={2}>
-          <Grid container xs={12} justify="space-between">
+          <Grid container item xs={12} justify="space-between">
             <Typography variant="h5">
               {props.title} by {props.user ? props.user : "Anonymous User"}{" "}
             </Typography>
@@ -65,8 +65,8 @@ const ProfileCard = props => {
                   </li>
                 ))
               ) : (
-                <p>(None Listed)</p>
-              )}
+                  <p>(None Listed)</p>
+                )}
             </ul>
 
             <Typography variant="body1">
