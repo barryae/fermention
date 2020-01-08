@@ -27,7 +27,7 @@ module.exports = {
                 );
 
                 res.json({
-                    id: dbUser._id,
+                    _id: dbUser._id,
                     username: dbUser.username,
                     token: token
                 })
