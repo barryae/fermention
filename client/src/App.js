@@ -19,8 +19,12 @@ import Auth from "./utils/Auth";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#55370f',
+      main: '#55370f'
     },
+
+    secondary: {
+      main: '#722f48'
+    }
 
   },
 });

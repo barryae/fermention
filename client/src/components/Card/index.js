@@ -31,7 +31,7 @@ const Card = props => {
 
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h5">{props.title} by <span onClick={() => props.setUser(props.user)} id="username">{props.user ? props.user : "Anonymous User"}</span> </Typography>
+            <Typography variant="h5">{props.title} by <span onClick={() => props.setUser(props.user)} id="feedusername">{props.user ? props.user : "Anonymous User"}</span> </Typography>
           </Grid>
 
           <Grid item xs={12} sm={6}>

@@ -25,7 +25,8 @@ class NewBrewForm extends Component {
         ingredient: "",
         amount: 1,
         units: "mL",
-        loading: false
+        loading: false,
+        message: ""
     }
 
     //Handles changes in input
@@ -164,12 +165,31 @@ class NewBrewForm extends Component {
                 picture: "",
                 ingredient: "",
                 amount: 1,
-                units: "mL"
+                units: "mL",
+                message: "New Brew Added!"
             });
 
             //Resets file input
             this.fileInput.value = "";
 
+            //displays message for limited time
+            setTimeout(
+                function () {
+                    this.setState({ message: "" });
+                }
+                    .bind(this),
+                5000
+            );
+
+        } else {
+            this.setState({ message: "A title is required!" })
+            setTimeout(
+                function () {
+                    this.setState({ message: "" });
+                }
+                    .bind(this),
+                5000
+            );
         }
 
     };
@@ -340,19 +360,19 @@ class NewBrewForm extends Component {
                             )}
 
                     </FormControl>
-
+                    {(this.state.message) ? <p style={{ border: '2px solid black', padding: '1em', backgroundColor: 'white', textAlign: 'center', margin: '0 auto' }}><b>{this.state.message}</b></p> : <></>}
                     <div id="wrapper">
                         <Button
                             size="large"
                             variant="contained"
-                            color="primary"
+                            color="secondary"
                             id="createBtn"
                             onClick={this.handleSubmit}>
                             Create New Brew</Button>
                     </div>
 
-
                 </Container>
+
             </>
         );
     }

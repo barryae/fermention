@@ -101,9 +101,9 @@ class Profile extends Component {
         return (
             <Grid container justify="center" spacing={6}>
 
-                <Grid container item justify="center" xs={12} sm={8}>
-                    <ProfileBio user={this.state.user.username}/>
-                </Grid>
+
+                <Grid item xs={12} sm={8}><ProfileBio user={this.state.user.username} /></Grid>
+
 
                 <Grid item xs={12} sm={8} >
                     <FormControl
