@@ -5,9 +5,12 @@ body {
   background-image: url("./images/bricks.jpg");
 }
 
+#feedusername {
+  border-bottom: 2px dotted #722f48;
+}
+
 #feedusername:hover {
   cursor: pointer;
-  text-decoration: underline;
 }
 
 #clearUser{
