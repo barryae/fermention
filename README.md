@@ -2,7 +2,7 @@
 
 Bringing fermentation culture back to the social biome.
 
-Deployed at: <fermention.herokuapp.com>
+Deployed at: [Fermention App](fermention.herokuapp.com)
 
 ## **Proposal**
 
