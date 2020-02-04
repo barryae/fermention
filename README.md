@@ -40,6 +40,3 @@ Add edit function for user recipes.
 
 Add ability for users to export their recipes.
 
-## **Project Management Board Screenshot**
-
-![Project Board](https://github.com/barryae/fermention/blob/master/client/public/images/projectBoard.png)
